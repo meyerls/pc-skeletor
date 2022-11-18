@@ -15,7 +15,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setuptools.setup(
-    name='skeletonizer',
+    name='skeletor',
     version='0.0.1',
     description='Point Cloud Skeletonizer',
     license="MIT",
