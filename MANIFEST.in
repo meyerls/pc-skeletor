@@ -1,0 +1,3 @@
+recursive-include ./skeletonizer *
+exclude ./data *
+exclude ./skeletonizer/data *
