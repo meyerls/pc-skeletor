@@ -9,15 +9,20 @@ PC Skeletor is python library for extracting a 1d skeleton from point clouds usi
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or 
 [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
 
+
+<a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
+<a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>
+<a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
+
 ## About
 
 Make sure that you have a Python version >=3.7 installed.
 
 ## Installation
 
-This repository is tested on Python 3.6+ and can be installed from PyPi.
+This repository is tested on Python 3.6+ and can currently only be installed from TestPyPi.
  ````bash
- pip install pc_skeletor
+pip install -i https://test.pypi.org/simple/ pc-skeletor
  ````
 
 ## Usage
@@ -27,6 +32,14 @@ import pc_skeletor
 # Tbd
 
 ````
+
+## Limitation / Improvements
+
+- [ ] Implement L1-Medial skeleton of point cloud
+- [ ] Improve code
+- [ ] Provide example
+- [ ] Adapt hyperparameters for laplacian based contraction
+- [ ] Test code 
 
 ## Literature and Code used for implementation
 
