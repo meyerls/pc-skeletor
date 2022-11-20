@@ -1,5 +1,5 @@
-<p align="center" width="20%">
-    <img width="20%" src="https://seeklogo.com/images/H/he-man-masters-of-the-universe-skeletor-logo-3CF16AF77D-seeklogo.com.png">
+<p align="center" width="100%">
+    <img width="30%" src="img/PCSkeletor.png">
 </p>
 
 # Skeletor - Point Cloud Skeletonization
