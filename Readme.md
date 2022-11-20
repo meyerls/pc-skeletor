@@ -19,7 +19,7 @@ PC Skeletor is a Python library for extracting a 1d skeleton from 3d point cloud
 ## Installation
 Make sure that you have a Python version >=3.7 installed.
 
-This repository is tested on Python 3.6+ and can currently only be installed from TestPyPi.
+This repository is tested on Python 3.6+ and can currently only be installed from [TestPyPi](https://test.pypi.org/project/pc-skeletor/).
  ````bash
 pip install -i https://test.pypi.org/simple/ pc-skeletor
  ````
