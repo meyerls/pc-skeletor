@@ -1,12 +1,10 @@
-<p align="center" width="200%">
-    
-<h1>  <img width="15%"  src="img/PCSkeletor_left.png"> Skeletor - Point Cloud Skeletonization    <img width="15%" src="img/PCSkeletor.png"></h1>
+<p align="center">
+<h1>
+  <img style="vertical-align:middle" width="10%" src="img/PCSkeletor_left.png">
+  <span style="">PC Skeletor - Point Cloud Skeletonization</span>
+  <img style="vertical-align:middle" width="10%" src="img/PCSkeletor.png">
+</h1>
 </p>
-
-
-
-
-
 
 ## Laplacian based contraction
 
@@ -43,7 +41,7 @@ year = {2013}
 ## Robust Laplacian for Point Clouds
 
 Paper: http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf
-Source Code: https://github.com/nmwsharp/robust-laplacians-py 
+Source Code: https://github.com/nmwsharp/robust-laplacians-py
 
 ````bash
 @article{Sharp:2020:LNT,
