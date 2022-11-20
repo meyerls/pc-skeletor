@@ -1,8 +1,12 @@
-<p align="center" width="100%">
-    <img width="30%" src="img/PCSkeletor.png">
+<p align="center" width="200%">
+    
+<h1>  <img width="15%" src="img/PCSkeletor.png"> Skeletor - Point Cloud Skeletonization    <img width="15%" src="img/PCSkeletor.png"></h1>
 </p>
 
-# Skeletor - Point Cloud Skeletonization
+
+
+
+
 
 ## Laplacian based contraction
 
