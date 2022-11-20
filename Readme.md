@@ -1,6 +1,6 @@
 <p align="center" width="200%">
     
-<h1>  <img width="15%" src="img/PCSkeletor.png"> Skeletor - Point Cloud Skeletonization    <img width="15%" src="img/PCSkeletor.png"></h1>
+<h1>  <img width="15%"  src="img/PCSkeletor_left.png"> Skeletor - Point Cloud Skeletonization    <img width="15%" src="img/PCSkeletor.png"></h1>
 </p>
 
 
