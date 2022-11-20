@@ -3,3 +3,6 @@ pc_skeletor/data
 .idea
 **/ __pycache__
 skeletor.egg-info
+build
+dist
+skeletor-*
