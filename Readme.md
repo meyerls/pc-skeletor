@@ -1,7 +1,7 @@
 <p align="center">
 <h1>
   <img style="vertical-align:middle" width="10%" src="img/PCSkeletor_left.png">
-  <span style="">PC Skeletor - Point Cloud Skeletonization</span>
+  <b style="">PC Skeletor - Point Cloud Skeletonization</b>
   <img style="vertical-align:middle" width="10%" src="img/PCSkeletor.png">
 </h1>
 </p>
