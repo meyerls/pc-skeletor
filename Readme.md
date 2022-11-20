@@ -5,20 +5,19 @@
   <img style="vertical-align:middle" width="10%" src="img/PCSkeletor.png">
 </h1></p>
 
-PC Skeletor is python library for extracting a 1d skeleton from point clouds using eiter the algorithm of
-[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or 
-[L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
-
-
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
 
 ## About
 
-Make sure that you have a Python version >=3.7 installed.
+PC Skeletor is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from 
+[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or 
+[L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
+
 
 ## Installation
+Make sure that you have a Python version >=3.7 installed.
 
 This repository is tested on Python 3.6+ and can currently only be installed from TestPyPi.
  ````bash
