@@ -9,11 +9,10 @@
 <a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
 
-
 ## About
 
-PC Skeletor is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from 
-[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or 
+PC Skeletor is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from
+[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or
 [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
 
 
@@ -21,22 +20,38 @@ PC Skeletor is a Python library for extracting a 1d skeleton from 3d point cloud
     <img width="50%" src="img/tree_sceleton_small.gif">
 </p>
 
-
-
 ## Installation
+
 Make sure that you have a Python version >=3.7 installed.
 
-This repository is tested on Python 3.6+ and can currently only be installed from [TestPyPi](https://test.pypi.org/project/pc-skeletor/).
+This repository is tested on Python 3.6+ and can currently only be installed
+from [TestPyPi](https://test.pypi.org/project/pc-skeletor/).
+
  ````bash
 pip install -i https://test.pypi.org/simple/ pc-skeletor
  ````
 
 ## Usage
+
 ````python
 import pc_skeletor
+from pc_skeletor import skeletor
+from pc_skeletor.download import Dataset
+import numpy as np
 
-# Tbd
+# Download test tree dataset
+downloader = Dataset()
+downloader.download_tree_dataset()
 
+# Init tree skeletonizer
+skeletor = skeletor.Skeletonizer(point_cloud=downloader.file_path,
+                                 down_sample=0.01,
+                                 debug=False)
+sceleton = skeletor.extract(method='Laplacian')
+# save results
+skeletor.save(result_folder='./data/')
+# Make animation of original point cloud and skeleton
+skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out='./data/')
 ````
 
 ## Limitation / Improvements
@@ -45,7 +60,7 @@ import pc_skeletor
 - [ ] Improve code
 - [ ] Provide example
 - [ ] Adapt hyperparameters for laplacian based contraction
-- [ ] Test code 
+- [ ] Test code
 
 ## Literature and Code used for implementation
 

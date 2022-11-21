@@ -316,6 +316,6 @@ if __name__ == '__main__':
     sceleton = skeletor.extract(method='Laplacian')
     output_folder = './data/'
     # save results
-    skeletor.save(output_folder)
+    skeletor.save(result_folder=output_folder)
     # Make animation of original point cloud and skeletonization
     skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out=output_folder)
