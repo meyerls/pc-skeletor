@@ -51,7 +51,9 @@ sceleton = skeletor.extract(method='Laplacian')
 # save results
 skeletor.save(result_folder='./data/')
 # Make animation of original point cloud and skeleton
-skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out='./data/')
+skeletor.animate(init_rot=np.asarray([[1, 0, 0],
+                                      [0, 0, 1],
+                                      [0, 1, 0]]), steps=200, out='./data/')
 ````
 
 ## Limitation / Improvements

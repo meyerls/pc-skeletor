@@ -16,7 +16,7 @@ with open(path.join(this_directory, 'Readme.md'), encoding='utf-8') as f:
 
 setuptools.setup(
     name='pc_skeletor',
-    version='0.0.2',
+    version='0.0.3',
     description='Point Cloud Skeletonizer',
     license="MIT",
     long_description=long_description,
