@@ -1,8 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Copyright (c) 2022 Lukas Meyer
+Licensed under the MIT License.
+See LICENSE file for more information.
+"""
+
+# Built-in/Generic Imports
 import os
 import timeit
-from copy import copy
 
-import open3d.visualization
+# Libs
+import open3d.visualization as o3d
 import robust_laplacian
 import numpy as np
 import scipy.sparse.linalg as sla
@@ -11,7 +20,9 @@ import matplotlib.pyplot as plt
 from dgl.geometry import farthest_point_sampler
 import torch
 
-from tree_sceleton.utility import *
+# Own modules
+from pc_skeletor.utility import *
+from pc_skeletor.download import *
 
 
 def least_squares_sparse(pcd_points, laplacian, laplacian_weighting, positional_weighting, debug=False):
@@ -211,7 +222,10 @@ class Skeletonizer(object):
 
 
 if __name__ == '__main__':
-    pcd_file = '../data/tree.ply'
+    downloader = Dataset()
+    downloader.download_tree_dataset()
+
+    pcd_file = downloader.file_path
     pcd = o3d.io.read_point_cloud(pcd_file)
     output_folder = './data/'
     skeletor = Skeletonizer(point_cloud=pcd,

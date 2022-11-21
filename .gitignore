@@ -7,3 +7,4 @@ build
 dist
 pc_skeletor-*
 pc_skeletor.egg-info
+pc_skeletor/__pycache__/**

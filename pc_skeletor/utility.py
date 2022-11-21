@@ -3,7 +3,6 @@ import time
 
 import open3d as o3d
 
-
 def timeit(func):
     @wraps(func)
     def timeit_wrapper(*args, **kwargs):

@@ -1,8 +1,8 @@
 <p align="center">
 <h1>
-  <img style="vertical-align:middle" width="10%" src="img/PCSkeletor_left.png">
+  <img style="vertical-align:middle" width="5%" src="img/PCSkeletor_left.png">
   <b style="">PC Skeletor - Point Cloud Skeletonization</b>
-  <img style="vertical-align:middle" width="10%" src="img/PCSkeletor.png">
+  <img style="vertical-align:middle" width="5%" src="img/PCSkeletor.png">
 </h1></p>
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
