@@ -1,6 +1,6 @@
 from functools import wraps
 import time
-
+import imageio
 import open3d as o3d
 
 def timeit(func):
@@ -52,3 +52,16 @@ def display_inlier_outlier(cloud, ind):
                                       front=[0.4257, -0.2125, -0.8795],
                                       lookat=[2.6172, 2.0475, 1.532],
                                       up=[-0.0694, -0.9768, 0.2024])
+
+def generate_gif(filenames, output_name):
+    """
+    Generates GIF from a list of image file paths
+
+    :param filenames: a list of image file paths
+    :param output_path: output folder to save gif
+    :return:
+    """
+    images = []
+    for filename in filenames:
+        images.append(imageio.imread(filename))
+    imageio.mimsave('./{}.gif'.format(output_name), images, format='GIF')

@@ -82,6 +82,8 @@ class Dataset:
 
         self.url = 'https://faubox.rrze.uni-erlangen.de/dl/fiY7DMQ5TgQwoA1LvedgRu/tree.zip'
 
+        self.dataset_name ='tree'
+
         existence = self.__check_existence(output_directory=output_path, dataset_name=self.dataset_name)
 
         if existence == NON_EXIST:
