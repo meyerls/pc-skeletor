@@ -1,9 +1,10 @@
 <p align="center">
-<h1>
-  <img style="vertical-align:middle" width="8%" src="img/PCSkeletor_left.png">
-  <b style="">PC Skeletor - Point Cloud Skeletonization</b>
-  <img style="vertical-align:middle" width="8%" src="img/PCSkeletor.png">
-</h1></p>
+    <h1>
+      <img style="vertical-align:middle" width="8%" src="img/PCSkeletor_left.png">
+      <b style="">PC Skeletor - Point Cloud Skeletonization</b>
+      <img style="vertical-align:middle" width="8%" src="img/PCSkeletor.png">
+    </h1>
+</p>
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>

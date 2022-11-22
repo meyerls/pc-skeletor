@@ -33,6 +33,7 @@ setuptools.setup(
                       "dgl",
                       "torch",
                       "tqdm",
+                      "imageio",
                       "wget"],  # external packages as dependencies
 
     classifiers=[

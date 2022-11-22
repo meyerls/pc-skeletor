@@ -6,3 +6,4 @@ dgl
 torch
 open3d
 tqdm
+imageio
