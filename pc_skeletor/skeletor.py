@@ -101,6 +101,7 @@ class Skeletonizer(object):
 
         self.MAX_LAPLACE_CONTRACTION_WEIGHT = config["MAX_LAPLACE_CONTRACTION_WEIGHT"]  # 2048
         self.MAX_POSITIONAL_WEIGHT = config["MAX_POSITIONAL_WEIGHT"]  # 2048
+        self.init_laplacian_scale_factor = config["INIT_LAPLACIAN_SCALE"]
 
         if num_pcd_points < 1000:
             s_l = 1
@@ -166,7 +167,7 @@ class Skeletonizer(object):
             if i == 0:
                 # Init weights, weighted by the mass matrix
                 positional_weights = positional_weights * np.ones(M.shape[0])
-                laplacian_weigths = 1 / (100 * np.mean(M.diagonal()))  # 1 * np.sqrt(np.mean(M.diagonal())) # 10 ** -3
+                laplacian_weigths = 1 / (self.init_laplacian_scale_factor * np.mean(M.diagonal()))  # 1 * np.sqrt(np.mean(M.diagonal())) # 10 ** -3
             else:
                 # Update laplacian weights with amplification factor
                 laplacian_weigths *= amplification
@@ -321,7 +322,8 @@ if __name__ == '__main__':
                             down_sample=0.01,
                             debug=False)
     laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
-                        "MAX_POSITIONAL_WEIGHT": 1024}
+                        "MAX_POSITIONAL_WEIGHT": 1024,
+                        "INIT_LAPLACIAN_SCALE": 100}
     sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
     output_folder = './data/'
     # save results

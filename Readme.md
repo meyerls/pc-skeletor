@@ -45,7 +45,9 @@ downloader.download_tree_dataset()
 skeletor = skeletor.Skeletonizer(point_cloud=downloader.file_path,
                                  down_sample=0.01,
                                  debug=False)
-sceleton = skeletor.extract(method='Laplacian')
+laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
+                    "MAX_POSITIONAL_WEIGHT": 1024}
+sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
 # save results
 skeletor.save(result_folder='./data/')
 # Make animation of original point cloud and skeleton
@@ -56,7 +58,7 @@ skeletor.animate(init_rot=np.asarray([[1, 0, 0],
 skeletor.visualize()
 ````
 
-## Parametrization
+## Ω Parametrization
 
 ### Laplacian-Based Contraction
 
@@ -90,6 +92,17 @@ farthest-point method.
 To archive good contraction result and avoid over- and under-contraction it is necessary to initialize and update the
 weights $\mathbf{W_L}$ and $\mathbf{W_H}$. Therefore the initial values and the maximum values for both diagonal
 weighting matrices have to adjusted to archive good results.
+
+Parameters:
+
+* **MAX_LAPLACE_CONTRACTION_WEIGHT** [default: 1024]: indicates the maximum contraction factor. If the skeleton is not
+  shrunk to a line and has a net-like structure, this factor should be increased.
+* **MAX_POSITIONAL_WEIGHT** [default: 1024]: indicates the maximum positional or attraction factor. If the skeleton has
+  lost its shape, this factor can be increased to maintain the shape.
+* **INIT_LAPLACIAN_SCALE** [default: 100]: this parameter gives the initial amplification of the laplace weights. At the
+  beginning the laplace weights are calculated over $\frac{1}{\alpha \sum m_ii}$. $\alpha$ is the amplification factor
+  and m_ii are the diagonal elements of the
+  computed [Mass Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes).
 
 ### L1-Medial Skeleton
 
