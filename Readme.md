@@ -94,7 +94,7 @@ To archive good contraction result and avoid over- and under-contraction it is n
 weights $\mathbf{W_L}$ and $\mathbf{W_H}$. Therefore the initial values and the maximum values for both diagonal
 weighting matrices have to adjusted to archive good results.
 
-Parameters:
+#### Hyperparameters
 
 * **MAX_LAPLACE_CONTRACTION_WEIGHT** [default: 1024]: indicates the maximum contraction factor. If the skeleton is not
   shrunk to a line and has a net-like structure, this factor should be increased.
