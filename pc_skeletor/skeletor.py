@@ -7,9 +7,8 @@ See LICENSE file for more information.
 """
 
 # Built-in/Generic Imports
-import os
-import timeit
 from typing import Tuple
+from copy import copy
 
 # Libs
 import open3d.visualization as o3d
@@ -21,7 +20,6 @@ import matplotlib.pyplot as plt
 from dgl.geometry import farthest_point_sampler
 import torch
 from scipy.spatial.transform import Rotation as R
-from copy import copy
 
 # Own modules
 from pc_skeletor.utility import *

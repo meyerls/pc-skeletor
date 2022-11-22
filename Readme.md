@@ -56,6 +56,18 @@ skeletor.animate(init_rot=np.asarray([[1, 0, 0],
 skeletor.visualize()
 ````
 
+## Parametrization
+
+### Laplacian-Based Contraction
+
+Laplacian-Based Contraction is a method based on contraction of point clouds to extract curve skeletons by iteratively
+contracting the point cloud. This method is robust to missing data and noise. Additionally no prior knowledge on the
+topology of the object has to be made.
+
+### L1-Medial Skeleton
+
+tbd
+
 ## 📖 Literature and Code used for implementation
 
 #### Laplacian based contraction
