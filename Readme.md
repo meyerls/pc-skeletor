@@ -87,7 +87,7 @@ with cotangent weights. The Laplacian of a point cloud (Laplace-Beltrami Operato
 curvature Vector](http://www.cs.cmu.edu/~kmcrane/Projects/DDG/paper.pdf)(p. 88 & p. 100). $\mathbf{P}$ is the original
 point cloud, $\mathbf{P}^{'}$ a contracted point cloud and $\mathbf{W_L}$ and $\mathbf{W_H}$ are diagonal weight
 matrices balancing the contraction and attraction forces. During the contraction the point clouds get thinner and
-thinner until the solution converges. Afterwards the contracted point cloud aka. skeleton is afterwards sampled using
+thinner until the solution converges. Afterwards the contracted point cloud aka. skeleton is sampled using
 farthest-point method.
 
 To archive good contraction result and avoid over- and under-contraction it is necessary to initialize and update the
