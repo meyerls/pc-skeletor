@@ -25,7 +25,8 @@ jobs:
           cd pc_skeletor
           python test.py
           ls -la 
-          ls -la data
+          ls -la ${{ github.workspace }}
+          pwd
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
