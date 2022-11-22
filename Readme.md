@@ -15,18 +15,9 @@
     <img width="70%" src="img/tree_sceleton_small.gif">
 </p>
 
-## Installation
-
-Make sure that you have a Python version >=3.7 installed.
-
-This repository is tested on Python 3.6+ and can currently only be installed
-from [TestPyPi](https://test.pypi.org/project/pc-skeletor/).
-
- ````bash
-pip install -i https://test.pypi.org/simple/ pc-skeletor
- ````
-
 ## ⚡️ Quick Start
+
+### Installation
 
 First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed via
 from [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
@@ -65,7 +56,7 @@ skeletor.animate(init_rot=np.asarray([[1, 0, 0],
 skeletor.visualize()
 ````
 
-## Literature and Code used for implementation
+## 📖 Literature and Code used for implementation
 
 #### Laplacian based contraction
 
