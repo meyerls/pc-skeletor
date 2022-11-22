@@ -51,20 +51,13 @@ skeletor.animate(init_rot=np.asarray([[1, 0, 0],
                                       [0, 1, 0]]), steps=200, out='./data/')
 ````
 
-## Limitation / Improvements
-
-- [ ] Implement L1-Medial skeleton of point cloud
-- [ ] Improve code
-- [ ] Provide example
-- [ ] Adapt hyperparameters for laplacian based contraction
-- [ ] Test code
-
 ## Literature and Code used for implementation
 
 #### Laplacian based contraction
 
-Our implementation of [Point Cloud Skeletons via Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) is a python reimplementation of the original [Matlab code](https://github.com/taiya/cloudcontr).
-
+Our implementation
+of [Point Cloud Skeletons via Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) is a
+python reimplementation of the original [Matlab code](https://github.com/taiya/cloudcontr).
 
 #### L1-Medial Skeleton of Point Cloud (NOT YET IMPLEMENTED!)
 
@@ -86,6 +79,14 @@ year = {2013}
 
 #### Robust Laplacian for Point Clouds
 
-Computation of the discrete laplacian operator via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be found in the [robust-laplacian](https://github.com/nmwsharp/robust-laplacians-py) package.
+Computation of the discrete laplacian operator
+via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be
+found in the [robust-laplacian](https://github.com/nmwsharp/robust-laplacians-py) package.
 
+## Limitation / Improvements
 
+- [ ] Implement L1-Medial skeleton of point cloud
+- [ ] Improve code
+- [ ] Provide example
+- [ ] Adapt hyperparameters for laplacian based contraction
+- [ ] Test code
