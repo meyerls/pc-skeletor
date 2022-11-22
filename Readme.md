@@ -46,7 +46,8 @@ skeletor = skeletor.Skeletonizer(point_cloud=downloader.file_path,
                                  down_sample=0.01,
                                  debug=False)
 laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
-                    "MAX_POSITIONAL_WEIGHT": 1024}
+                    "MAX_POSITIONAL_WEIGHT": 1024,
+                    "INIT_LAPLACIAN_SCALE": 100}
 sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
 # save results
 skeletor.save(result_folder='./data/')
@@ -100,8 +101,8 @@ Parameters:
 * **MAX_POSITIONAL_WEIGHT** [default: 1024]: indicates the maximum positional or attraction factor. If the skeleton has
   lost its shape, this factor can be increased to maintain the shape.
 * **INIT_LAPLACIAN_SCALE** [default: 100]: this parameter gives the initial amplification of the laplace weights. At the
-  beginning the laplace weights are calculated over $\frac{1}{\alpha \cdot \sum^{n}_i m_{ii}}$. $\alpha$ is the 
-  amplification factor and m_ii are the diagonal elements of the computed 
+  beginning the laplace weights are calculated over $\frac{1}{\alpha \sum^{n}_i m_{ii}}$. $\alpha$ is the
+  amplification factor and $m_{ii}$ are the diagonal elements of the computed
 * [Mass Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes) $\mathbf{M}$.
 
 ### L1-Medial Skeleton
