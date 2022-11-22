@@ -16,11 +16,11 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
+      - name: 'Install dependencies'
         run: |
           python -m pip install --upgrade pip
           pip install .
-      - name: Test PC Skeletor
+      - name: 'Test PC Skeletor'
         run: |
           cd pc_skeletor
           python test.py
@@ -28,7 +28,9 @@ jobs:
           ls -la data
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
+        run: |
+          echo "This folder is upload:" && ls ${{ github.workspace }}/data
         with:
           name: skeleton-artifact
-          path: data/
+          path: ${{ github.workspace }}/data/**/*
           retention-days: 5
