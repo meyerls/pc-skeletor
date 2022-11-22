@@ -167,7 +167,8 @@ class Skeletonizer(object):
             if i == 0:
                 # Init weights, weighted by the mass matrix
                 positional_weights = positional_weights * np.ones(M.shape[0])
-                laplacian_weigths = 1 / (self.init_laplacian_scale_factor * np.mean(M.diagonal()))  # 1 * np.sqrt(np.mean(M.diagonal())) # 10 ** -3
+                laplacian_weigths = 1 / (self.init_laplacian_scale_factor * np.mean(
+                    M.diagonal()))  # 1 * np.sqrt(np.mean(M.diagonal())) # 10 ** -3
             else:
                 # Update laplacian weights with amplification factor
                 laplacian_weigths *= amplification
@@ -282,7 +283,11 @@ class Skeletonizer(object):
         generate_gif(filenames=image_path_list, output_name='skeleton_animation')
 
     def extract(self, method: str = 'Laplacian',
-                config: typing.Dict = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024, "MAX_POSITIONAL_WEIGHT": 1024}) -> Tuple[
+                config: typing.Dict = {
+                    "MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
+                    "MAX_POSITIONAL_WEIGHT": 1024,
+                    "INIT_LAPLACIAN_SCALE": 100
+                }) -> Tuple[
         o3d.geometry.PointCloud, o3d.geometry.PointCloud]:
 
         if method == 'Laplacian':
