@@ -1,6 +1,6 @@
 # Own modules
-from pc_skeletor.skeletor import *
-from pc_skeletor.download import *
+from .skeletor import *
+from .download import *
 
 if __name__ == "__main__":
     downloader = Dataset()
