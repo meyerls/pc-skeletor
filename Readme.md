@@ -81,7 +81,7 @@ year = {2013}
 
 Computation of the discrete laplacian operator
 via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be
-found in the [robust-laplacian](https://github.com/nmwsharp/robust-laplacians-py) package.
+found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacians-py) repository.
 
 ## Limitation / Improvements
 
