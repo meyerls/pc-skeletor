@@ -63,17 +63,8 @@ skeletor.animate(init_rot=np.asarray([[1, 0, 0],
 
 #### Laplacian based contraction
 
-Paper: https://taiya.github.io/pubs/cao2010cloudcontr.pdf
+Our implementation of [Point Cloud Skeletons via Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) is a python reimplementation of the original [Matlab code](https://github.com/taiya/cloudcontr).
 
-Source Code: https://github.com/taiya/cloudcontr
-
-````bash
-@inproceedings{cao_smi10,
-author = {Junjie Cao and Andrea Tagliasacchi and Matt Olson and Hao Zhang and Zhixun Su},
-title = {Point Cloud Skeletons via Laplacian-Based Contraction},
-booktitle = {Proc. of IEEE Conf. on Shape Modeling and Applications},
-year = 2015}
-````
 
 #### L1-Medial Skeleton of Point Cloud (NOT YET IMPLEMENTED!)
 
@@ -95,19 +86,6 @@ year = {2013}
 
 #### Robust Laplacian for Point Clouds
 
-Computation of the discrete laplacian operator the code below is used.
+Computation of the discrete laplacian operator via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be found in the [robust-laplacian](https://github.com/nmwsharp/robust-laplacians-py) package.
 
-Paper: http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf
-Source Code: https://github.com/nmwsharp/robust-laplacians-py
-
-````bash
-@article{Sharp:2020:LNT,
-  author={Nicholas Sharp and Keenan Crane},
-  title={{A Laplacian for Nonmanifold Triangle Meshes}},
-  journal={Computer Graphics Forum (SGP)},
-  volume={39},
-  number={5},
-  year={2020}
-}
-````
 
