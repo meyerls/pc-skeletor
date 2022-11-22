@@ -80,7 +80,10 @@ The contraction is computed by iteratively solving the linear system
 obtained from [Kin-Chung Au et al.](http://graphics.csie.ncku.edu.tw/Skeleton/skeleton-paperfinal.pdf)
 $\mathbf{L}$ is a $n \times n$
 [Laplacian Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
-matrix with cotangent weights.
+with cotangent weights. The Laplacian of a point cloud (Laplace-Beltrami Operator) can be used to compute the [mean
+curvature Vector](http://www.cs.cmu.edu/~kmcrane/Projects/DDG/paper.pdf)(p. 88 & p. 100). $\mathbf{P}$ is the original
+point cloud, $\mathbf{P}^{'}$ a contracted point cloud and $\mathbf{W_L}$ $\mathbf{W_H}$ are diagonal weight matrices 
+balacing the contraction and attraction constrains.
 
 ### L1-Medial Skeleton
 
