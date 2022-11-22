@@ -334,6 +334,6 @@ if __name__ == '__main__':
     # save results
     skeletor.save(result_folder=output_folder)
     # Make animation of original point cloud and skeletonization
-    skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out=output_folder)
+    #skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out=output_folder)
     # Interactive visualization
-    skeletor.visualize()
+    #skeletor.visualize()
