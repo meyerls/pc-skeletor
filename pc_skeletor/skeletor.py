@@ -202,6 +202,9 @@ class Skeletonizer(object):
 
         return pcd_points
 
+    def visualize(self):
+        o3d.visualization.draw_geometries([self.pcd, self.sceleton])
+
     def animate(self, init_rot: np.ndarray = np.eye(3),
                 steps: int = 360,
                 point_size: float = 1.0,
@@ -319,3 +322,5 @@ if __name__ == '__main__':
     skeletor.save(result_folder=output_folder)
     # Make animation of original point cloud and skeletonization
     skeletor.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=200, out=output_folder)
+    # Interactive visualization
+    skeletor.visualize()

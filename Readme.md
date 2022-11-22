@@ -6,7 +6,7 @@
 
 ## About
 
-PC Skeletor is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from
+**PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or
 [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
 
@@ -26,7 +26,19 @@ from [TestPyPi](https://test.pypi.org/project/pc-skeletor/).
 pip install -i https://test.pypi.org/simple/ pc-skeletor
  ````
 
-## Usage
+## ⚡️ Quick Start
+
+First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed via
+from [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
+
+ ````bash
+pip install pc-skeletor
+ ````
+
+### Basic Usage
+
+Below is the code to execute the skeletonization algorithm with a downloaded example point cloud. Additionally to the
+extraction an animation with the original point cloud and the skeleton is created and exported as a gif.
 
 ````python
 import pc_skeletor
@@ -49,6 +61,8 @@ skeletor.save(result_folder='./data/')
 skeletor.animate(init_rot=np.asarray([[1, 0, 0],
                                       [0, 0, 1],
                                       [0, 1, 0]]), steps=200, out='./data/')
+# Interactive visualization
+skeletor.visualize()
 ````
 
 ## Literature and Code used for implementation
