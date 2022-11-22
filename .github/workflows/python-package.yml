@@ -1,6 +1,6 @@
-name: Python package
+name: Test PC Skeletor code
 
-on: [push]
+on: [ push ]
 
 jobs:
   build:
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.8", "3.9", "3.10"]
+        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -16,10 +16,6 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-#      - name: Checkout submodules
-#        uses: srt32/git-actions@v0.0.3
-#        with:
-#          args: git config --global --add safe.directory /github/workspace && git submodule update --init --recursive
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
