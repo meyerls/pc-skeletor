@@ -73,15 +73,8 @@ topology of the object has to be made.
 \mathbf{0}\\
 \mathbf{W_H} \mathbf{P}
 \end{bmatrix}
-\end{equation}
 ```
 
-```math
-|C_n| = 2^n = \begin{cases}
-  1&\text{if $n=0$}\\
-  |C_{n-1}| \times 2&\text{otherwise}
-\end{cases}
-```
 
 
 ### L1-Medial Skeleton
