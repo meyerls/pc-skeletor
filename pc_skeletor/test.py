@@ -14,3 +14,6 @@ if __name__ == "__main__":
                         "MAX_POSITIONAL_WEIGHT": 1024,
                         "INIT_LAPLACIAN_SCALE": 100}
     sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
+    output_folder = './data/'
+    # save results
+    skeletor.save(result_folder=output_folder)

@@ -24,3 +24,9 @@ jobs:
         run: |
           cd pc_skeletor
           python test.py
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v3
+        with:
+          name: skeleton-artifact
+          path: ./data/02_sceleton.ply
+          retention-days: 5
