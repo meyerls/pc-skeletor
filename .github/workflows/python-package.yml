@@ -28,8 +28,6 @@ jobs:
           ls -la data
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
-        run: |
-          echo "This folder is upload:" && ls ${{ github.workspace }}/data
         with:
           name: skeleton-artifact
           path: ${{ github.workspace }}/data/**/*
