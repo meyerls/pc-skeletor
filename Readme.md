@@ -12,7 +12,7 @@ PC Skeletor is a Python library for extracting a 1d skeleton from 3d point cloud
 
 
 <p align="center">
-    <img width="50%" src="img/tree_sceleton_small.gif">
+    <img width="70%" src="img/tree_sceleton_small.gif">
 </p>
 
 ## Installation
