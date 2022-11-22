@@ -31,5 +31,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: skeleton-artifact
-          path: ${{ github.workspace }}/data/**/*
+          path: ${{ github.workspace }}/pc_skeletor/data/**/*
           retention-days: 5
