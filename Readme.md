@@ -64,6 +64,19 @@ Laplacian-Based Contraction is a method based on contraction of point clouds to 
 contracting the point cloud. This method is robust to missing data and noise. Additionally no prior knowledge on the
 topology of the object has to be made.
 
+```math
+\begin{bmatrix}
+\mathbf{W_L} \mathbf{L}\\
+\mathbf{W_H}
+\end{bmatrix} \mathbf{P}^{'} =
+\begin{bmatrix}
+\mathbf{0}\\
+\mathbf{W_H} \mathbf{P}
+\end{bmatrix}
+\end{equation}
+``` 
+
+
 ### L1-Medial Skeleton
 
 tbd
