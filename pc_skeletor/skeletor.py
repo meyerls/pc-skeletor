@@ -9,6 +9,7 @@ See LICENSE file for more information.
 # Built-in/Generic Imports
 from typing import Tuple
 from copy import copy
+import typing
 
 # Libs
 import open3d.visualization as o3d
@@ -88,7 +89,7 @@ class Skeletonizer(object):
         o3d.io.write_point_cloud(os.path.join(result_folder, '02_sceleton' + '.ply'),
                                  self.sceleton)
 
-    def init_laplacian_weights(self, num_pcd_points: int) -> Tuple[float, float, float]:
+    def init_laplacian_weights(self, num_pcd_points: int, config: typing.Dict) -> Tuple[float, float, float]:
         '''
         Initialize parameters for laplacian based contraction. This is a suggestion! For a best practice these values
         should be computed automatically and not with hard decision.
@@ -98,8 +99,8 @@ class Skeletonizer(object):
         '''
         positional_init_weights = 1
 
-        self.MAX_LAPLACE_CONTRACTION_WEIGHT = 1024  # 2048
-        self.MAX_CONTRACTION_WEIGHT = 1024  # 2048
+        self.MAX_LAPLACE_CONTRACTION_WEIGHT = config["MAX_LAPLACE_CONTRACTION_WEIGHT"]  # 2048
+        self.MAX_POSITIONAL_WEIGHT = config["MAX_POSITIONAL_WEIGHT"]  # 2048
 
         if num_pcd_points < 1000:
             s_l = 1
@@ -126,6 +127,7 @@ class Skeletonizer(object):
     @timeit
     def laplacian_contraction(self, point_cloud: o3d.geometry.PointCloud,
                               down_sample: float,
+                              config: typing.Dict,
                               iterations: int = 15) -> o3d.geometry.PointCloud:
         '''
         Laplacian based contraction on point clouds.
@@ -147,7 +149,7 @@ class Skeletonizer(object):
         pcd_points = np.asarray(pcd.points)
 
         positional_weights, amplification, volume_ratio_quit = self.init_laplacian_weights(
-            num_pcd_points=pcd_points.shape[0])
+            num_pcd_points=pcd_points.shape[0], config=config)
 
         print('PCD #Points: ', pcd_points.shape[0], '\n')
         print('Stepwise amplification factor: ', amplification)
@@ -174,7 +176,7 @@ class Skeletonizer(object):
 
             # Clip weights
             laplacian_weigths = np.clip(laplacian_weigths, 1, self.MAX_LAPLACE_CONTRACTION_WEIGHT)
-            positional_weights = np.clip(positional_weights, 1, self.MAX_CONTRACTION_WEIGHT)
+            positional_weights = np.clip(positional_weights, 1, self.MAX_POSITIONAL_WEIGHT)
 
             print('Laplacian Weight: ', laplacian_weigths)
             print('Mean Positional Weight: ', np.mean(positional_weights))
@@ -278,10 +280,14 @@ class Skeletonizer(object):
 
         generate_gif(filenames=image_path_list, output_name='skeleton_animation')
 
-    def extract(self, method: str = 'Laplacian') -> Tuple[o3d.geometry.PointCloud, o3d.geometry.PointCloud]:
+    def extract(self, method: str = 'Laplacian',
+                config: typing.Dict = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024, "MAX_POSITIONAL_WEIGHT": 1024}) -> Tuple[
+        o3d.geometry.PointCloud, o3d.geometry.PointCloud]:
 
         if method == 'Laplacian':
-            contracted_point_cloud = self.laplacian_contraction(point_cloud=self.pcd, down_sample=self.down_sample)
+            contracted_point_cloud = self.laplacian_contraction(point_cloud=self.pcd,
+                                                                down_sample=self.down_sample,
+                                                                config=config)
         elif method == 'L1':
             raise NotImplementedError('Up to now only Laplacian based contraction!')
         else:
@@ -314,7 +320,9 @@ if __name__ == '__main__':
     skeletor = Skeletonizer(point_cloud=downloader.file_path,
                             down_sample=0.01,
                             debug=False)
-    sceleton = skeletor.extract(method='Laplacian')
+    laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
+                        "MAX_POSITIONAL_WEIGHT": 1024}
+    sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
     output_folder = './data/'
     # save results
     skeletor.save(result_folder=output_folder)

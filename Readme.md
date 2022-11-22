@@ -82,8 +82,14 @@ $\mathbf{L}$ is a $n \times n$
 [Laplacian Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
 with cotangent weights. The Laplacian of a point cloud (Laplace-Beltrami Operator) can be used to compute the [mean
 curvature Vector](http://www.cs.cmu.edu/~kmcrane/Projects/DDG/paper.pdf)(p. 88 & p. 100). $\mathbf{P}$ is the original
-point cloud, $\mathbf{P}^{'}$ a contracted point cloud and $\mathbf{W_L}$ $\mathbf{W_H}$ are diagonal weight matrices 
-balacing the contraction and attraction constrains.
+point cloud, $\mathbf{P}^{'}$ a contracted point cloud and $\mathbf{W_L}$ and $\mathbf{W_H}$ are diagonal weight
+matrices balancing the contraction and attraction forces. During the contraction the point clouds get thinner and
+thinner until the solution converges. Afterwards the contracted point cloud aka. skeleton is afterwards sampled using
+farthest-point method.
+
+To archive good contraction result and avoid over- and under-contraction it is necessary to initialize and update the
+weights $\mathbf{W_L}$ and $\mathbf{W_H}$. Therefore the initial values and the maximum values for both diagonal
+weighting matrices have to adjusted to archive good results.
 
 ### L1-Medial Skeleton
 
