@@ -102,8 +102,10 @@ Parameters:
   lost its shape, this factor can be increased to maintain the shape.
 * **INIT_LAPLACIAN_SCALE** [default: 100]: this parameter gives the initial amplification of the laplace weights. At the
   beginning the laplace weights are calculated over $\frac{1}{\alpha \sum_i m_{ii}}$. $\alpha$ is the
-  amplification factor and $m_{ii}$ are the diagonal elements of the computed
-* [Mass Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes) $\mathbf{M}$.
+  amplification factor and $m_{ii}$ are the diagonal elements of the
+  computed [Mass Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
+  $\mathbf{M}$. A large $\alpha$ might lead to a fast convergence with a loss of the original shape. This value should
+  be adjusted regarding the size of the original point cloud.
 
 ### L1-Medial Skeleton
 
