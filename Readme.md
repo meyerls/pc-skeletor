@@ -1,4 +1,4 @@
-# PC Skeletor - Point Cloud Skeletonization <img align="right" height="200" src="img/PCSkeletor.png">
+# PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>

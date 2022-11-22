@@ -24,6 +24,8 @@ jobs:
         run: |
           cd pc_skeletor
           python test.py
+          ls -la 
+          ls -la data
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
