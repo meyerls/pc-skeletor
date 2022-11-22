@@ -77,8 +77,8 @@ The contraction is computed by iteratively solving the linear system
 \end{bmatrix}
 ```
 
-obtained from [Kin-Chung Au et al.](http://graphics.csie.ncku.edu.tw/Skeleton/skeleton-paperfinal.pdf).
-```math \mathbf{L} ``` is a ``` n \times n ```
+obtained from [Kin-Chung Au et al.](http://graphics.csie.ncku.edu.tw/Skeleton/skeleton-paperfinal.pdf)
+$ \mathbf{L} $ is a $ n \times n $
 [Laplacian Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
 matrix with cotangent weights.
 
