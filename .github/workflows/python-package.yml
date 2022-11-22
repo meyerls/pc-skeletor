@@ -26,5 +26,5 @@ jobs:
           pip install -r requirements.txt
       - name: Test PC Skeletor
         run: |
-          ls -la
-          python pc_skeletor/test.py
+          cd pc_skeletor
+          python test.py

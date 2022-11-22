@@ -146,7 +146,5 @@ found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacian
 ## Limitation / Improvements
 
 - [ ] Implement L1-Medial skeleton of point cloud
-- [ ] Improve code
-- [ ] Provide example
-- [ ] Adapt hyperparameters for laplacian based contraction
+- [ ] Add graph extraction
 - [ ] Test code
