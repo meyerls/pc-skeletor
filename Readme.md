@@ -64,18 +64,23 @@ Laplacian-Based Contraction is a method based on contraction of point clouds to 
 contracting the point cloud. This method is robust to missing data and noise. Additionally no prior knowledge on the
 topology of the object has to be made.
 
+The contraction is computed by iteratively solving the linear system
+
 ```math
 \begin{bmatrix}
 \mathbf{W_L} \mathbf{L}\\
 \mathbf{W_H}
-\end{bmatrix} \mathbf{P}^{'} =
+\end{bmatrix} \mathbf{P}^{'} =/home/luigi/Dropbox/05_productive/01_code/Library/sceleton/data/tree.ply
 \begin{bmatrix}
 \mathbf{0}\\
 \mathbf{W_H} \mathbf{P}
 \end{bmatrix}
 ```
 
-
+obtained from [Kin-Chung Au et al.](http://graphics.csie.ncku.edu.tw/Skeleton/skeleton-paperfinal.pdf). $$\mathbf{L}$$
+is a $$ n \times n
+$$ [Laplacian Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes) matrix with
+cotangent weights.
 
 ### L1-Medial Skeleton
 
