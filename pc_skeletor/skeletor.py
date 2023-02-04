@@ -14,10 +14,8 @@ import typing
 # Libs
 import open3d.visualization as o3d
 import robust_laplacian
-import numpy as np
-import scipy.sparse.linalg as sla
-from scipy import sparse
-import matplotlib.pyplot as plt
+import networkx as nx
+import mistree as mist
 from dgl.geometry import farthest_point_sampler
 import torch
 from scipy.spatial.transform import Rotation as R
@@ -25,31 +23,6 @@ from scipy.spatial.transform import Rotation as R
 # Own modules
 from pc_skeletor.utility import *
 from pc_skeletor.download import *
-
-
-def least_squares_sparse(pcd_points, laplacian, laplacian_weighting, positional_weighting, debug=False):
-    # Define Weights
-    I = sparse.eye(pcd_points.shape[0])
-    WL = I * laplacian_weighting
-    WH = sparse.diags(positional_weighting)
-
-    A = sparse.vstack([laplacian.dot(WL), WH]).tocsc()
-    b = np.vstack([np.zeros((pcd_points.shape[0], 3)), WH.dot(pcd_points)])
-
-    A_new = A.T @ A
-
-    if debug:
-        plt.spy(A_new, ms=0.1)
-        plt.title('A_new: A.T @ A')
-        plt.show()
-
-    permc_method = 'COLAMD'
-
-    x = sla.spsolve(A_new, A.T @ b[:, 0], permc_spec=permc_method)
-    y = sla.spsolve(A_new, A.T @ b[:, 1], permc_spec=permc_method)
-    z = sla.spsolve(A_new, A.T @ b[:, 2], permc_spec=permc_method)
-
-    return np.vstack([x, y, z]).T
 
 
 class Skeletonizer(object):
@@ -65,13 +38,14 @@ class Skeletonizer(object):
     def __init__(self, point_cloud: [o3d.geometry.PointCloud, str], debug: bool, down_sample: float = 0.005):
         '''
 
-        :param point_cloud: Either an open3d PointCloud object, or a string
+        :param point_cloud: Either an open3d point cloud object, or a string
             which should be a path to a point cloud file to open.
         :param debug: Boolean, causes several pyplot windows to get shown to
             debug the process.
         :param down_sample: Performs voxel_down_sample on the given point cloud
             before running contraction. Smaller values will result in smaller
             voxels, which will take longer to run.
+
         '''
         if isinstance(point_cloud, str):
             self.pcd = load_pcd(filename=point_cloud, normalize=False)
@@ -85,6 +59,8 @@ class Skeletonizer(object):
         # Intermediate pcd results
         self.contracted_point_cloud = None
         self.sceleton = None
+
+        self.graph_k_n = 15
 
     def save(self, result_folder: str):
         os.makedirs(result_folder, exist_ok=True)
@@ -318,7 +294,33 @@ class Skeletonizer(object):
         branch_contracted_points_fps = pcd2torch[0, point_idx].numpy()[0]
         self.sceleton = points2pcd(branch_contracted_points_fps)
 
-        return self.contracted_point_cloud, self.sceleton
+        # Connectivity with MST
+        mst = mist.GetMST(x=branch_contracted_points_fps[:, 0], y=branch_contracted_points_fps[:, 1],
+                          z=branch_contracted_points_fps[:, 2])
+        d, l, b, s, l_index, b_index = mst.get_stats(include_index=True, k_neighbours=self.graph_k_n)
+
+        # Convert to Graph
+        mst = nx.Graph(l_index.T.tolist())
+        for idx in range(mst.number_of_nodes()):
+            mst.nodes[idx]['pos'] = branch_contracted_points_fps[idx].T
+
+        G_simplified, node_pos, node_idx = simplifyGraph(mst)
+        skeleton_cleaned = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(np.vstack(node_pos)))
+        skeleton_cleaned.paint_uniform_color([0, 0, 1])
+        skeleton_cleaned_points = np.asarray(skeleton_cleaned.points)
+
+        mapping = {}
+        for node in G_simplified:
+            pcd_idx = np.where(skeleton_cleaned_points == G_simplified.nodes[node]['pos'])[0][0]
+            mapping.update({node: pcd_idx})
+
+        self.graph = nx.relabel_nodes(G_simplified, mapping)
+
+        self.skeleton_graph = o3d.geometry.LineSet()
+        self.skeleton_graph.points = o3d.utility.Vector3dVector(skeleton_cleaned_points)
+        self.skeleton_graph.lines = o3d.utility.Vector2iVector(list((self.graph.edges())))
+
+        return self.sceleton, self.graph, self.skeleton_graph
 
 
 if __name__ == '__main__':
@@ -333,7 +335,7 @@ if __name__ == '__main__':
     laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
                         "MAX_POSITIONAL_WEIGHT": 1024,
                         "INIT_LAPLACIAN_SCALE": 100}
-    sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
+    skeleton, graph, skeleton_graph = skeletor.extract(method='Laplacian', config=laplacian_config)
     output_folder = './data/'
     # save results
     skeletor.save(result_folder=output_folder)

@@ -16,7 +16,7 @@ with open(path.join(this_directory, 'Readme.md'), encoding='utf-8') as f:
 
 setuptools.setup(
     name='pc_skeletor',
-    version='0.0.6',
+    version='0.0.7',
     description='Point Cloud Skeletonizer',
     license="MIT",
     long_description=long_description,
@@ -34,7 +34,9 @@ setuptools.setup(
                       "torch",
                       "tqdm",
                       "imageio",
-                      "wget"],  # external packages as dependencies
+                      "wget",
+                      "mistree",
+                      "networkx"],  # external packages as dependencies
 
     classifiers=[
         'Programming Language :: Python :: 3.7',
