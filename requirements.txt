@@ -1,5 +1,5 @@
-robust_laplacian
 numpy
+robust_laplacian
 scipy
 matplotlib
 dgl
