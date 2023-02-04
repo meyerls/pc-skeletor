@@ -1,4 +1,5 @@
 numpy
+f2py
 robust_laplacian
 scipy
 matplotlib
@@ -7,5 +8,5 @@ torch
 open3d
 tqdm
 imageio
-mistree==1.1.0
+mistree
 networkx
