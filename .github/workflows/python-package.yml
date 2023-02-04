@@ -19,8 +19,7 @@ jobs:
       - name: 'Install dependencies'
         run: |
           python -m pip install --upgrade pip
-          pip install numpy
-          pip install f2py
+          pip install charset-normalizer
           pip install .
       - name: 'Test PC Skeletor'
         run: |
