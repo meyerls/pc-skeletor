@@ -20,7 +20,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install numpy
-          pip install mistree
+          pip install mistree==1.1.0
           pip install .
       - name: 'Test PC Skeletor'
         run: |

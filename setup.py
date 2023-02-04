@@ -35,7 +35,7 @@ setuptools.setup(
                       "tqdm",
                       "imageio",
                       "wget",
-                      "mistree",
+                      "mistree==1.1.0",
                       "networkx"],  # external packages as dependencies
 
     classifiers=[
