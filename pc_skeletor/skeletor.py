@@ -38,14 +38,14 @@ class Skeletonizer(object):
     def __init__(self, point_cloud: [o3d.geometry.PointCloud, str], debug: bool, down_sample: float = 0.005):
         '''
 
-        :param point_cloud:
-        :param debug:
-        :param down_sample:
+        :param point_cloud: Either an open3d point cloud object, or a string
+            which should be a path to a point cloud file to open.
+        :param debug: Boolean, causes several pyplot windows to get shown to
+            debug the process.
+        :param down_sample: Performs voxel_down_sample on the given point cloud
+            before running contraction. Smaller values will result in smaller
+            voxels, which will take longer to run.
 
-        :param point_cloud: point cloud or string path to point cloud
-        :param debug: Boolean, causes several pyplot windows to get shown to debug the process.
-        :param down_sample: Performs voxel_down_sample on the given point cloudb before running contraction.
-                            Smaller values will result in smaller voxels, which will take longer to run.
         '''
         if isinstance(point_cloud, str):
             self.pcd = load_pcd(filename=point_cloud, normalize=False)
