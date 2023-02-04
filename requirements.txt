@@ -1,4 +1,4 @@
-mistree
+mistree==1.2.0
 numpy
 robust_laplacian
 scipy

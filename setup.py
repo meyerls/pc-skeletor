@@ -25,7 +25,7 @@ setuptools.setup(
     author_email='lukas.meyer@fau.de',
     url="https://github.com/meyerls/PC-Skeletor",
     packages=['pc_skeletor'],
-    install_requires=["mistree",
+    install_requires=["mistree==1.2.0",
                       "numpy",
                       "scipy",
                       "matplotlib",
