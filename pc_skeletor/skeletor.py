@@ -316,11 +316,11 @@ class Skeletonizer(object):
 
         self.graph = nx.relabel_nodes(G_simplified, mapping)
 
-        self.scelecton_graph = o3d.geometry.LineSet()
-        self.scelecton_graph.points = o3d.utility.Vector3dVector(skeleton_cleaned_points)
-        self.scelecton_graph.lines = o3d.utility.Vector2iVector(list((self.graph.edges())))
+        self.skeleton_graph = o3d.geometry.LineSet()
+        self.skeleton_graph.points = o3d.utility.Vector3dVector(skeleton_cleaned_points)
+        self.skeleton_graph.lines = o3d.utility.Vector2iVector(list((self.graph.edges())))
 
-        return self.sceleton, self.graph, self.scelecton_graph
+        return self.sceleton, self.graph, self.skeleton_graph
 
 
 if __name__ == '__main__':
@@ -335,7 +335,7 @@ if __name__ == '__main__':
     laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
                         "MAX_POSITIONAL_WEIGHT": 1024,
                         "INIT_LAPLACIAN_SCALE": 100}
-    sceleton, graph, scelecton_graph = skeletor.extract(method='Laplacian', config=laplacian_config)
+    skeleton, graph, skeleton_graph = skeletor.extract(method='Laplacian', config=laplacian_config)
     output_folder = './data/'
     # save results
     skeletor.save(result_folder=output_folder)

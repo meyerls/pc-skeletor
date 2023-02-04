@@ -48,7 +48,7 @@ skeletor = skeletor.Skeletonizer(point_cloud=downloader.file_path,
 laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
                     "MAX_POSITIONAL_WEIGHT": 1024,
                     "INIT_LAPLACIAN_SCALE": 100}
-sceleton = skeletor.extract(method='Laplacian', config=laplacian_config)
+skeleton, graph, skeleton_graph = skeletor.extract(method='Laplacian', config=laplacian_config)
 # save results
 skeletor.save(result_folder='./data/')
 # Make animation of original point cloud and skeleton
