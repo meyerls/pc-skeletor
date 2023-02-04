@@ -7,3 +7,5 @@ torch
 open3d
 tqdm
 imageio
+mistree
+networkx
