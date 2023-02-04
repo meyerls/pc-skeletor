@@ -25,7 +25,8 @@ setuptools.setup(
     author_email='lukas.meyer@fau.de',
     url="https://github.com/meyerls/PC-Skeletor",
     packages=['pc_skeletor'],
-    install_requires=["numpy",
+    install_requires=["mistree",
+                      "numpy",
                       "scipy",
                       "matplotlib",
                       "open3d",
@@ -35,7 +36,6 @@ setuptools.setup(
                       "tqdm",
                       "imageio",
                       "wget",
-                      "mistree",
                       "networkx"],  # external packages as dependencies
 
     classifiers=[
