@@ -26,7 +26,6 @@ setuptools.setup(
     url="https://github.com/meyerls/PC-Skeletor",
     packages=['pc_skeletor'],
     install_requires=["numpy",
-                      "f2py",
                       "scipy",
                       "matplotlib",
                       "open3d",

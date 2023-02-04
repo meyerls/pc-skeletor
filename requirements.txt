@@ -1,5 +1,4 @@
 numpy
-f2py
 robust_laplacian
 scipy
 matplotlib
