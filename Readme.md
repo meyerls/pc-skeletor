@@ -143,6 +143,16 @@ Computation of the discrete laplacian operator
 via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be
 found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacians-py) repository.
 
+## Troubleshooting
+
+For Windows users, there might be issues installing the `mistree` library via `python -m pip install mistree` command. If you get an error message that the Fortran compiler cannot be found, please try the following:
+
+- Download and install this suite of compilation tools: http://www.equation.com/servlet/equation.cmd?fa=fortran
+- Add the `bin` folder in the installation directory to your `PATH` environment variable
+- After restarting your terminal and now trying to install `mistree` this should work now.
+- However, upon importing the library you might face an issue with missing DLL files. You simply need to copy or move them within the `mistree` installation directory, as explained here: https://github.com/knaidoo29/mistree/issues/14#issuecomment-1275022276
+- Now the PC-Skeletor should be running on your Windows machine.
+
 ## Limitation / Improvements
 
 - [ ] Implement L1-Medial skeleton of point cloud
