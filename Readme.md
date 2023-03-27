@@ -1,19 +1,3 @@
-<style>
-table {
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-td {
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
-}
-
-img {
-    max-width: 100%;
-}
-</style>
 # PC Skeletor - (Semantic) Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
@@ -36,6 +20,17 @@ img {
     <td><img src="img/s_lbc.gif" alt="Image 2"><h3>Semantic Laplacian-Based Contraction(S-LBC)</h3></td>
   </tr>
 </table>
+
+<div style="display:flex; justify-content:center;">
+    <div style="text-align:center; margin-right:20px;">
+        <h3>Heading 1</h3>
+        <img src="img/lbc.gif" alt="Image 1" width="40%"/>
+    </div>
+    <div style="text-align:center;">
+        <h3>Heading 2</h3>
+        <img src="img/s_lbc.gif" alt="Image 2" width="40%"/>
+    </div>
+</div>
 
 
 ## ⚡️ Quick Start
