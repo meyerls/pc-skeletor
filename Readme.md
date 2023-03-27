@@ -8,11 +8,22 @@
 <!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
 
 
-## About
+## Abstract
 
 **PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://google.de).
+
+<div style="display: flex; flex-direction: row; align-items: center;">
+    <div style="text-align: center; margin: 0 10px;">
+        <h2>Laplacian-Based Contraction (LBC)</h2>
+        <img src="img/lbc.gif" alt="LBC">
+    </div>
+    <div style="text-align: center; margin: 0 10px;">
+        <h2>Semantic Laplacian-Based Contraction(S-LBC)</h2>
+        <img src="img/s_lbc.gif" alt="S-LBC">
+    </div>
+</div>
 
 
 ## ⚡️ Quick Start
@@ -61,24 +72,26 @@ pcd = pcd_trunk + pcd_branch
 ````python
 from pc_skeletor import LBC
 
-lbc = LBC(point_cloud=pcd, down_sample=0.01)
+lbc = LBC(point_cloud=pcd, 
+          down_sample=0.008)
 lbc.extract_skeleton()
 lbc.extract_topology()
 lbc.visualize()
 lbc.save('./output')
-lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), 
+            steps=300, 
+            output='./output')
 ````
-<p align="center">
-    <img src="img/lbc.gif">
-</p>
-
 
 #### Semantic Laplacian-Based Contraction (S-LBC)
 
 ````python
 from pc_skeletor import SLBC
 
-s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01, debug=True)
+s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, 
+             semantic_weighting=30, 
+             down_sample=0.008, 
+             debug=True)
 s_lbc.extract_skeleton()
 s_lbc.extract_topology()
 s_lbc.visualize()
@@ -86,9 +99,6 @@ s_lbc.save('./output')
 s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 ````
 
-<p align="center">
-    <img src="img/s_lbc.gif">
-</p>
 
 
 ## Ω Parametrization

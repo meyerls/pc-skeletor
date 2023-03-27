@@ -9,3 +9,5 @@ pc_skeletor-*
 pc_skeletor.egg-info
 pc_skeletor/__pycache__/**
 pc_skeletor/tmp*
+
+output

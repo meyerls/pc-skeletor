@@ -13,7 +13,10 @@ if __name__ == "__main__":
     pcd = pcd_trunk + pcd_branch
 
     # Laplacian-based Contraction
-    lbc = LBC(point_cloud=pcd, down_sample=0.005)
+    lbc = LBC(point_cloud=pcd,
+              init_contraction=2,
+              init_attraction=0.2,
+              down_sample=0.005)
     lbc.extract_skeleton()
     lbc.extract_topology()
     #lbc.visualize()
@@ -23,6 +26,8 @@ if __name__ == "__main__":
     # Semantic Laplacian-based Contraction
     s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch},
                  semantic_weighting=30.,
+                 init_contraction=2,
+                 init_attraction=0.2,
                  down_sample=0.005)
     s_lbc.extract_skeleton()
     s_lbc.extract_topology()
