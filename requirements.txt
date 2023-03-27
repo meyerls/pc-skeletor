@@ -1,10 +1,8 @@
-mistree==1.2.0
+mistree
 numpy
 robust_laplacian
 scipy
 matplotlib
-dgl
-torch
 open3d
 tqdm
 imageio

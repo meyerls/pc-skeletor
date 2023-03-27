@@ -2,65 +2,94 @@
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
-
+<a href='https://pc-skeletor.readthedocs.io/en/latest/?badge=latest'>
+    <img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
+</a>
 <!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
 
 
 ## About
 
 **PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
-[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or
+[Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://google.de).
 
-
-<p align="center">
-    <img width="40%" src="img/tree_sceleton_small.gif">
-    <img width="40%" src="img/tree_sceleton_small.gif">
-</p>
 
 ## ⚡️ Quick Start
 
 ### Installation
 
-First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed via
-from [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
+First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
 
  ````bash
 pip install pc-skeletor
  ````
 
+### Installation from Source
+ ````bash
+git clone https://github.com/meyerls/pc_skeletor.git
+cd pc_skeletor
+pip install --upgrade pip setuptools
+pip install -r requirements.txt
+pip install -e .
+ ````
+
+
 ### Basic Usage
 
-Below is the code to execute the skeletonization algorithm with a downloaded example point cloud. Additionally to the
-extraction an animation with the original point cloud and the skeleton is created and exported as a gif.
+Below is the code to execute the skeletonization algorithm with a downloaded example point cloud. Additionally, to the
+extraction an animation with the original point cloud and the skeleton is created and exported as a gif. Both LBC and 
+S-LBC extract 
+* contracted point cloud
 
+#### Download Example Dataset
 ````python
-import pc_skeletor
-from pc_skeletor import skeletor
-from pc_skeletor.download import Dataset
+import open3d as o3d
 import numpy as np
 
-# Download test tree dataset
-downloader = Dataset()
-downloader.download_tree_dataset()
+from pc_skeletor import Dataset
 
-# Init tree skeletonizer
-skeletor = skeletor.Skeletonizer(point_cloud=downloader.file_path,
-                                 down_sample=0.01,
-                                 debug=False)
-laplacian_config = {"MAX_LAPLACE_CONTRACTION_WEIGHT": 1024,
-                    "MAX_POSITIONAL_WEIGHT": 1024,
-                    "INIT_LAPLACIAN_SCALE": 100}
-skeleton, graph, skeleton_graph = skeletor.extract(method='Laplacian', config=laplacian_config)
-# save results
-skeletor.save(result_folder='./data/')
-# Make animation of original point cloud and skeleton
-skeletor.animate(init_rot=np.asarray([[1, 0, 0],
-                                      [0, 0, 1],
-                                      [0, 1, 0]]), steps=200, out='./data/')
-# Interactive visualization
-skeletor.visualize()
+downloader = Dataset()
+trunk_pcd_path, branch_pcd_path = downloader.download_semantic_tree_dataset()
+
+pcd_trunk = o3d.io.read_point_cloud(trunk_pcd_path)
+pcd_branch = o3d.io.read_point_cloud(branch_pcd_path)
+pcd = pcd_trunk + pcd_branch
 ````
+
+#### Laplacian-Based Contraction (LBC)
+````python
+from pc_skeletor import LBC
+
+lbc = LBC(point_cloud=pcd, down_sample=0.01)
+lbc.extract_skeleton()
+lbc.extract_topology()
+lbc.visualize()
+lbc.save('./output')
+lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+````
+<p align="center">
+    <img src="img/lbc.gif">
+</p>
+
+
+#### Semantic Laplacian-Based Contraction (S-LBC)
+
+````python
+from pc_skeletor import SLBC
+
+s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01, debug=True)
+s_lbc.extract_skeleton()
+s_lbc.extract_topology()
+s_lbc.visualize()
+s_lbc.save('./output')
+s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+````
+
+<p align="center">
+    <img src="img/s_lbc.gif">
+</p>
+
 
 ## Ω Parametrization
 
@@ -84,7 +113,7 @@ The contraction is computed by iteratively solving the linear system
 ```
 
 obtained from [Kin-Chung Au et al.](http://graphics.csie.ncku.edu.tw/Skeleton/skeleton-paperfinal.pdf)
-$\mathbf{L}$ is a $n \times n$
+$\mathbf{L}$ is the $n \times n$
 [Laplacian Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
 with cotangent weights. The Laplacian of a point cloud (Laplace-Beltrami Operator) can be used to compute the [mean
 curvature Vector](http://www.cs.cmu.edu/~kmcrane/Projects/DDG/paper.pdf)(p. 88 & p. 100). $\mathbf{P}$ is the original
@@ -97,18 +126,26 @@ To archive good contraction result and avoid over- and under-contraction it is n
 weights $\mathbf{W_L}$ and $\mathbf{W_H}$. Therefore the initial values and the maximum values for both diagonal
 weighting matrices have to adjusted to archive good results.
 
-#### Hyperparameters
+#### Semantic Laplacian-Based Contraction
 
-* **MAX_LAPLACE_CONTRACTION_WEIGHT** [default: 1024]: indicates the maximum contraction factor. If the skeleton is not
-  shrunk to a line and has a net-like structure, this factor should be increased.
-* **MAX_POSITIONAL_WEIGHT** [default: 1024]: indicates the maximum positional or attraction factor. If the skeleton has
-  lost its shape, this factor can be increased to maintain the shape.
-* **INIT_LAPLACIAN_SCALE** [default: 100]: this parameter gives the initial amplification of the laplace weights. At the
-  beginning the laplace weights are calculated over $\frac{1}{\alpha \sum_i m_{ii}}$. $\alpha$ is the
-  amplification factor and $m_{ii}$ are the diagonal elements of the
-  computed [Mass Matrix](http://rodolphe-vaillant.fr/entry/101/definition-laplacian-matrix-for-triangle-meshes)
-  $\mathbf{M}$. A large $\alpha$ might lead to a fast convergence with a loss of the original shape. This value should
-  be adjusted regarding the size of the original point cloud.
+Semantic Laplacian-Based Contraction is based on Laplacian-based contraction and simply adds semantic knowledge to the
+skeletonization algorithm.
+
+```math
+\begin{bmatrix}
+\mathbf{S} \circ \mathbf{W_L} \mathbf{L}\\
+\mathbf{W_H}
+\end{bmatrix} \mathbf{P}^{'} =
+\begin{bmatrix}
+\mathbf{0}\\
+\mathbf{W_H} \mathbf{P}
+\end{bmatrix}
+```
+
+Standard LBC is prone to mal-contraction in cases where there is a significant disparity in 
+diameter between trunk and branches. In such cases fine structures experience an over- contraction and leading to a 
+distortion of their topological characteristics. In order to address these topological artifacts, we introduce semantic 
+Laplacian-based contraction (S-LBC). For more information please refer to the [[Paper](https://google.de)].
 
 ## 📖 Literature and Code used for implementation
 
@@ -124,6 +161,11 @@ Computation of the discrete laplacian operator
 via [Nonmanifold Laplace](http://www.cs.cmu.edu/~kmcrane/Projects/NonmanifoldLaplace/NonmanifoldLaplace.pdf) can be
 found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacians-py) repository.
 
+#### Minimum Spanning Tree
+
+The Minimum Spanning Tree is computed via  [Mistree](https://arxiv.org/pdf/1910.08562.pdf) a
+open-source implementation which can be found here [code](https://github.com/knaidoo29/mistree).
+
 ## Troubleshooting
 
 For Windows users, there might be issues installing the `mistree` library via `python -m pip install mistree` command. If you get an error message that the Fortran compiler cannot be found, please try the following:
@@ -137,18 +179,18 @@ For Windows users, there might be issues installing the `mistree` library via `p
 ## Limitation / Improvements
 
 - [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) of point clouds
-- [ ] Add graph extraction
+- [ ] Point2Skeleton
 - [ ] Test code
+- [ ] Remove torch from implementation and all cuda stuff
 
 
 # Citation
 
-Please cite this paper ([[Paper](https://google.de)]), if this work helps you with your research:
+Please cite this [[Paper](https://google.de)] if this work helps you with your research:
 
 ```
-@InProceedings{10.1007/978-3-031-16449-1_1,
-  author="Meyer, Lukas and Gilson, Andreas and Scholz, Oliver and Stamminger, Marc",
-  title="CherryPicker: Semantic Skeletonization and Topological Reconstruction of Cherry Trees",
-  year="2023"
-}
+tbd
+```
+
+
 

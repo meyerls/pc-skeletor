@@ -18,6 +18,42 @@ import open3d as o3d
 import numpy as np
 
 
+def visualize(geometry,
+              width=1920,
+              height=1080,
+              background_color=[0, 0, 0],
+              point_size=0.1,
+              line_width=1,
+              camera: dict = False,
+              window_name='Open3D',
+              filename=False):
+    vis = o3d.visualization.Visualizer()
+
+    vis.create_window(window_name=window_name, width=width, height=height)
+    opt = vis.get_render_option()
+    opt.point_size = point_size
+    opt.line_width = line_width
+    opt.background_color = background_color
+    vis.clear_geometries()
+
+    for g in geometry:
+        vis.add_geometry(g)
+
+    if camera:
+        ctr = vis.get_view_control()
+        ctr.set_front(camera['trajectory'][0]['front'])
+        ctr.set_lookat(camera['trajectory'][0]['lookat'])
+        ctr.set_up(camera['trajectory'][0]['up'])
+        ctr.set_zoom(camera['trajectory'][0]['zoom'])
+    opt.light_on = False
+
+    if filename:
+        vis.capture_screen_image(filename=filename, do_render=True)
+    else:
+        vis.run()
+    vis.close()
+
+
 def timeit(func):
     @wraps(func)
     def timeit_wrapper(*args, **kwargs):
