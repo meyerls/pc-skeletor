@@ -1,3 +1,19 @@
+<style>
+table {
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+td {
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+img {
+    max-width: 100%;
+}
+</style>
 # PC Skeletor - (Semantic) Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
