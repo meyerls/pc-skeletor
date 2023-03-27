@@ -3,10 +3,9 @@
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
 <a href='https://pc-skeletor.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
+<img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
 </a>
 <!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
-
 
 ## Abstract
 
@@ -16,23 +15,30 @@
 
 <table style="border: none;">
   <tr>
-    <td><h3>Laplacian-Based Contraction (LBC)</h3><img src="img/lbc.gif" alt="Image 1"></td>
-    <td><h3>Semantic LBC (S-LBC)</h3><<img src="img/s_lbc.gif" alt="Image 2">/td>
+    <td style="text-align: center;">
+        <h3>Laplacian-Based Contraction (LBC)</h3>
+        <img src="img/lbc.gif" alt="Image 1">
+    </td>
+    <td style="text-align: center;">
+        <h3>Semantic LBC (S-LBC)</h3>
+        <img src="img/s_lbc.gif" alt="Image 2">
+    </td>
   </tr>
 </table>
-
 
 ## ⚡️ Quick Start
 
 ### Installation
 
-First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
+First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed
+via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
 
  ````bash
 pip install pc-skeletor
  ````
 
 ### Installation from Source
+
  ````bash
 git clone https://github.com/meyerls/pc_skeletor.git
 cd pc_skeletor
@@ -41,15 +47,16 @@ pip install -r requirements.txt
 pip install -e .
  ````
 
-
 ### Basic Usage
 
 Below is the code to execute the skeletonization algorithm with a downloaded example point cloud. Additionally, to the
-extraction an animation with the original point cloud and the skeleton is created and exported as a gif. Both LBC and 
-S-LBC extract 
+extraction an animation with the original point cloud and the skeleton is created and exported as a gif. Both LBC and
+S-LBC extract
+
 * contracted point cloud
 
 #### Download Example Dataset
+
 ````python
 import open3d as o3d
 import numpy as np
@@ -65,17 +72,18 @@ pcd = pcd_trunk + pcd_branch
 ````
 
 #### Laplacian-Based Contraction (LBC)
+
 ````python
 from pc_skeletor import LBC
 
-lbc = LBC(point_cloud=pcd, 
+lbc = LBC(point_cloud=pcd,
           down_sample=0.008)
 lbc.extract_skeleton()
 lbc.extract_topology()
 lbc.visualize()
 lbc.save('./output')
-lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), 
-            steps=300, 
+lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]),
+            steps=300,
             output='./output')
 ````
 
@@ -84,9 +92,9 @@ lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]),
 ````python
 from pc_skeletor import SLBC
 
-s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, 
-             semantic_weighting=30, 
-             down_sample=0.008, 
+s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch},
+             semantic_weighting=30,
+             down_sample=0.008,
              debug=True)
 s_lbc.extract_skeleton()
 s_lbc.extract_topology()
@@ -94,8 +102,6 @@ s_lbc.visualize()
 s_lbc.save('./output')
 s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 ````
-
-
 
 ## Ω Parametrization
 
@@ -148,9 +154,9 @@ skeletonization algorithm.
 \end{bmatrix}
 ```
 
-Standard LBC is prone to mal-contraction in cases where there is a significant disparity in 
-diameter between trunk and branches. In such cases fine structures experience an over- contraction and leading to a 
-distortion of their topological characteristics. In order to address these topological artifacts, we introduce semantic 
+Standard LBC is prone to mal-contraction in cases where there is a significant disparity in
+diameter between trunk and branches. In such cases fine structures experience an over- contraction and leading to a
+distortion of their topological characteristics. In order to address these topological artifacts, we introduce semantic
 Laplacian-based contraction (S-LBC). For more information please refer to the [[Paper](https://google.de)].
 
 ## 📖 Literature and Code used for implementation
@@ -174,12 +180,15 @@ open-source implementation which can be found here [code](https://github.com/kna
 
 ## Troubleshooting
 
-For Windows users, there might be issues installing the `mistree` library via `python -m pip install mistree` command. If you get an error message that the Fortran compiler cannot be found, please try the following:
+For Windows users, there might be issues installing the `mistree` library via `python -m pip install mistree` command.
+If you get an error message that the Fortran compiler cannot be found, please try the following:
 
 - Download and install this suite of compilation tools: http://www.equation.com/servlet/equation.cmd?fa=fortran
 - Add the `bin` folder in the installation directory to your `PATH` environment variable
 - After restarting your terminal and now trying to install `mistree` this should work now.
-- However, upon importing the library you might face an issue with missing DLL files. You simply need to copy or move them within the `mistree` installation directory, as explained here: https://github.com/knaidoo29/mistree/issues/14#issuecomment-1275022276
+- However, upon importing the library you might face an issue with missing DLL files. You simply need to copy or move
+  them within the `mistree` installation directory, as explained
+  here: https://github.com/knaidoo29/mistree/issues/14#issuecomment-1275022276
 - Now the PC-Skeletor should be running on your Windows machine.
 
 ## Limitation / Improvements
@@ -188,7 +197,6 @@ For Windows users, there might be issues installing the `mistree` library via `p
 - [ ] Point2Skeleton
 - [ ] Test code
 - [ ] Remove torch from implementation and all cuda stuff
-
 
 # Citation
 
