@@ -16,12 +16,29 @@
 
 <table style="border: none;">
   <tr>
-    <td><img src="img/lbc.gif"alt="Image 1"><h3>Laplacian-Based Contraction (LBC)</h3></td>
-    <td><img src="img/s_lbc.gif" alt="Image 2"><h3>Semantic Laplacian-Based Contraction(S-LBC)</h3></td>
+    <td><img src="img/lbc.gif" alt="Image 1"><h3>Laplacian-Based Contraction (LBC)</h3></td>
+    <td><img src="img/s_lbc.gif" alt="Image 2"><h3>Semantic LBC (S-LBC)</h3></td>
   </tr>
 </table>
 
-
+<table style="border: none;">
+  <tr>
+    <td style="text-align: center;">
+      <h3>Laplacian-Based Contraction (LBC)</h3>
+    </td>
+    <td style="text-align: center;">
+      <h3>Semantic LBC (S-LBC)</h3>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top;">
+      <img src="img/lbc.gif" alt="Image 1" width="40%">
+    </td>
+    <td style="vertical-align: top;">
+      <img src="img/s_lbc.gif" alt="Image 2" width="40%">
+    </td>
+  </tr>
+</table>
 
 
 ## ⚡️ Quick Start
