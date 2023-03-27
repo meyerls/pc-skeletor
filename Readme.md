@@ -1,18 +1,21 @@
-# PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
+# PC Skeletor - (Semantic) Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
-<a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
+
+<!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
+
 
 ## About
 
-**PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using the algorithm from
+**PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) or
-[L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) (Not yet implemented!).
+[Semantic Laplacian-Based Contraction](https://google.de).
 
 
 <p align="center">
-    <img width="70%" src="img/tree_sceleton_small.gif">
+    <img width="40%" src="img/tree_sceleton_small.gif">
+    <img width="40%" src="img/tree_sceleton_small.gif">
 </p>
 
 ## ⚡️ Quick Start
@@ -107,10 +110,6 @@ weighting matrices have to adjusted to archive good results.
   $\mathbf{M}$. A large $\alpha$ might lead to a fast convergence with a loss of the original shape. This value should
   be adjusted regarding the size of the original point cloud.
 
-### L1-Medial Skeleton
-
-tbd
-
 ## 📖 Literature and Code used for implementation
 
 #### Laplacian based contraction
@@ -118,24 +117,6 @@ tbd
 Our implementation
 of [Point Cloud Skeletons via Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) is a
 python reimplementation of the original [Matlab code](https://github.com/taiya/cloudcontr).
-
-#### L1-Medial Skeleton of Point Cloud (NOT YET IMPLEMENTED!)
-
-Paper: https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf
-
-Source Code: https://github.com/HongqiangWei/L1-Skeleton
-
-````bash
-@ARTICLE{Huang2013,
-title = {L1-Medial Skeleton of Point Cloud},
-author = H. Huang and S. Wu and D. Cohen-Or and M. Gong and H. Zhang and G. Li and B.Chen},
-journal = {ACM Transactions on Graphics},
-volume = {32},
-issue = {4},
-pages = {65:1--65:8},
-year = {2013}
-}
-````
 
 #### Robust Laplacian for Point Clouds
 
@@ -155,6 +136,19 @@ For Windows users, there might be issues installing the `mistree` library via `p
 
 ## Limitation / Improvements
 
-- [ ] Implement L1-Medial skeleton of point cloud
+- [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) of point clouds
 - [ ] Add graph extraction
 - [ ] Test code
+
+
+# Citation
+
+Please cite this paper ([[Paper](https://google.de)]), if this work helps you with your research:
+
+```
+@InProceedings{10.1007/978-3-031-16449-1_1,
+  author="Meyer, Lukas and Gilson, Andreas and Scholz, Oliver and Stamminger, Marc",
+  title="CherryPicker: Semantic Skeletonization and Topological Reconstruction of Cherry Trees",
+  year="2023"
+}
+
