@@ -17,11 +17,11 @@
 <div style="display: flex; flex-direction: row; align-items: center;">
     <div style="text-align: center; margin: 0 10px;">
         <h2>Laplacian-Based Contraction (LBC)</h2>
-        <img src="img/lbc.gif" alt="LBC">
+        <img width="40%" src="img/lbc.gif" alt="LBC">
     </div>
     <div style="text-align: center; margin: 0 10px;">
         <h2>Semantic Laplacian-Based Contraction(S-LBC)</h2>
-        <img src="img/s_lbc.gif" alt="S-LBC">
+        <img width="40%" src="img/s_lbc.gif" alt="S-LBC">
     </div>
 </div>
 
