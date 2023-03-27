@@ -31,10 +31,10 @@
     </td>
   </tr>
   <tr>
-    <td style="vertical-align: center;">
+    <td>
       <img src="img/lbc.gif" alt="Image 1" width="40%">
     </td>
-    <td style="vertical-align: center;">
+    <td>
       <img src="img/s_lbc.gif" alt="Image 2" width="40%">
     </td>
   </tr>
