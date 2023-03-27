@@ -14,23 +14,14 @@
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://google.de).
 
-<table>
+<table style="border: none;">
   <tr>
     <td><img src="img/lbc.gif"alt="Image 1"><h3>Laplacian-Based Contraction (LBC)</h3></td>
     <td><img src="img/s_lbc.gif" alt="Image 2"><h3>Semantic Laplacian-Based Contraction(S-LBC)</h3></td>
   </tr>
 </table>
 
-<div style="display:flex; justify-content:center;">
-    <div style="text-align:center; margin-right:20px;">
-        <h3>Heading 1</h3>
-        <img src="img/lbc.gif" alt="Image 1" width="40%"/>
-    </div>
-    <div style="text-align:center;">
-        <h3>Heading 2</h3>
-        <img src="img/s_lbc.gif" alt="Image 2" width="40%"/>
-    </div>
-</div>
+
 
 
 ## ⚡️ Quick Start
