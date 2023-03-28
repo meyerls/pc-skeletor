@@ -1,6 +1,7 @@
-name: s-lbc
+name: mistree
 
 dependencies:
+  - numpy
   - pip
   - pip:
     - mistree
