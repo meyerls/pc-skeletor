@@ -1,7 +1,0 @@
-name: mistree
-
-dependencies:
-  - numpy
-  - pip
-  - pip:
-    - mistree

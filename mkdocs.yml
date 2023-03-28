@@ -1,7 +1,0 @@
-site_name: PC-Skeletor
-nav:
-  - Home: index.md
-  - LBC: laplacian.md
-plugins:
-  - mkdocstrings
-theme: readthedocs
