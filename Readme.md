@@ -13,7 +13,7 @@ there is a significant disparity in diameter between trunk and branches. In such
 an over-contraction and leading to a distortion of their topological characteristics. In addition, LBC shows a 
 topologically incorrect tree skeleton for trunk structures that have holes in the point cloud.In order to address 
 these topological artifacts, we introduce semantic Laplacian-based contraction (S-LBC). It integrates semantic 
-information of the point cloud into the contraction algorithm
+information of the point cloud into the contraction algorithm.
 
 
 <table>
@@ -57,8 +57,18 @@ extraction an animation with the original point cloud and the skeleton is create
 S-LBC extract
 
 * contracted point cloud (````o3d.geometry.PointCloud```` )
+
+<img src="img/contracted.gif" width='40%'>
+
+
 * topologic important points (````o3d.geometry.LineSet```` )
+
+
 * topology as a graph (````Networkx.Graph````)
+
+<img src="img/topology.gif" width='40%'>
+
+
 
 #### Download Example Dataset
 
@@ -107,6 +117,7 @@ s_lbc.visualize()
 s_lbc.save('./output')
 s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 ````
+
 
 ## Ω Parametrization
 
@@ -199,9 +210,9 @@ If you get an error message that the Fortran compiler cannot be found, please tr
 ## :heavy_exclamation_mark: Limitation / Improvements
 
 - [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) of point clouds
-- [ ] Point2Skeleton
+- [ ] Implement [Point2Skeleton](https://arxiv.org/pdf/2012.00230.pdf)
+- [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) 
 - [ ] Test code
-- [ ] Remove torch from implementation and all cuda stuff
 
 # 📖 Citation
 

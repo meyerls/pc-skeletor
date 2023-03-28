@@ -20,11 +20,6 @@ from pc_skeletor.download import *
 from pc_skeletor.base import *
 
 
-class Topology(object):
-    def __init__(self):
-        pass
-
-
 class LaplacianBasedContractionBase(SkeletonBase):
     """
     Base class for laplacian based algorithms
@@ -82,12 +77,7 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         self.graph_k_n = 15
 
-    def set_amplification(self, test):
-        """
-
-        :param test:
-        :return:
-        """
+    def set_amplification(self):
 
         # Set amplification factor of contraction weights.
         if isinstance(self.step_wise_contraction_amplification, str):
@@ -235,7 +225,8 @@ class LaplacianBasedContractionBase(SkeletonBase):
         # Artifacts at zero
         pcd_contracted_tree = o3d.geometry.KDTreeFlann(self.contracted_point_cloud)
         idx_near_zero = np.argmin(np.linalg.norm(np.asarray(contracted_point_cloud_zero_artifact.points), axis=1))
-        [k, idx, _] = pcd_contracted_tree.search_radius_vector_3d(contracted_point_cloud_zero_artifact.points[idx_near_zero], 0.01)
+        [k, idx, _] = pcd_contracted_tree.search_radius_vector_3d(
+            contracted_point_cloud_zero_artifact.points[idx_near_zero], 0.01)
 
         self.contracted_point_cloud = contracted_point_cloud_zero_artifact.select_by_index(idx, invert=True)
 
@@ -260,7 +251,7 @@ class LaplacianBasedContractionBase(SkeletonBase):
         for idx in range(mst.number_of_nodes()):
             mst.nodes[idx]['pos'] = skeleton_points[idx].T
 
-        G_simplified, node_pos, node_idx = simplifyGraph(mst)
+        G_simplified, node_pos, node_idx = simplify_graph(mst)
         skeleton_cleaned = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(np.vstack(node_pos)))
         skeleton_cleaned.paint_uniform_color([0, 0, 1])
         skeleton_cleaned_points = np.asarray(skeleton_cleaned.points)
