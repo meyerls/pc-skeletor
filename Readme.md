@@ -2,9 +2,6 @@
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
-<a href='https://pc-skeletor.readthedocs.io/en/latest/?badge=latest'>
-    <img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
-</a>
 <!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
 **PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
@@ -23,11 +20,11 @@ information of the point cloud into the contraction algorithm
   <tr>
     <td align="center">
         <h4>Laplacian-Based Contraction (LBC)</h4>
-        <img src="docs/_static/lbc.gif" alt="Image 1">
+        <img src="img/lbc.gif" alt="Image 1">
     </td>
     <td align="center">
         <h4>Semantic LBC (S-LBC)</h4>
-        <img src="docs/_static/s_lbc.gif" alt="Image 2">
+        <img src="img/s_lbc.gif" alt="Image 2">
     </td>
   </tr>
 </table>
