@@ -61,12 +61,13 @@ S-LBC extract
 <img src="img/contracted.gif" width='40%'>
 
 
-* topologic important points (````o3d.geometry.LineSet```` )
+* topologic as a line set (````o3d.geometry.LineSet```` )
+
+<img src="img/topology.gif" width='40%'>
 
 
 * topology as a graph (````Networkx.Graph````)
 
-<img src="img/topology.gif" width='40%'>
 
 
 
