@@ -1,0 +1,6 @@
+name: s-lbc
+
+dependencies:
+  - pip
+  - pip:
+    - mistree

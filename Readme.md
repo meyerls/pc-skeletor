@@ -22,11 +22,11 @@ information of the point cloud into the contraction algorithm
 <table>
   <tr>
     <td align="center">
-        <h3>Laplacian-Based Contraction (LBC)</h3>
+        <h4>Laplacian-Based Contraction (LBC)</h4>
         <img src="docs/_static/lbc.gif" alt="Image 1">
     </td>
     <td align="center">
-        <h3>Semantic LBC (S-LBC)</h3>
+        <h4>Semantic LBC (S-LBC)</h4>
         <img src="docs/_static/s_lbc.gif" alt="Image 2">
     </td>
   </tr>
