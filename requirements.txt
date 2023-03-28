@@ -1,4 +1,3 @@
-mistree
 numpy
 robust_laplacian
 scipy
@@ -7,3 +6,5 @@ open3d
 tqdm
 imageio
 networkx
+charset-normalizer
+mistree==1.2.1

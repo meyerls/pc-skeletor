@@ -1,28 +1,33 @@
-# PC Skeletor - (Semantic) Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
+# PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
 <a href='https://pc-skeletor.readthedocs.io/en/latest/?badge=latest'>
-<img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
+    <img src='https://readthedocs.org/projects/pc-skeletor/badge/?version=latest' alt='Documentation Status' />
 </a>
 <!--a href="https://github.com/meyerls/PC-Skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/PC-Skeletor/Python%20package"></a-->
-
-## Abstract
-
 **PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://google.de).
+
+## Abstract
+Standard Laplacian-based contraction (LBC) is prone to mal-contraction in cases where
+there is a significant disparity in diameter between trunk and branches. In such cases fine structures experience 
+an over-contraction and leading to a distortion of their topological characteristics. In addition, LBC shows a 
+topologically incorrect tree skeleton for trunk structures that have holes in the point cloud.In order to address 
+these topological artifacts, we introduce semantic Laplacian-based contraction (S-LBC). It integrates semantic 
+information of the point cloud into the contraction algorithm
 
 
 <table>
   <tr>
     <td align="center">
         <h3>Laplacian-Based Contraction (LBC)</h3>
-        <img src="img/lbc.gif" alt="Image 1">
+        <img src="docs/_static/lbc.gif" alt="Image 1">
     </td>
     <td align="center">
         <h3>Semantic LBC (S-LBC)</h3>
-        <img src="img/s_lbc.gif" alt="Image 2">
+        <img src="docs/_static/s_lbc.gif" alt="Image 2">
     </td>
   </tr>
 </table>
@@ -54,7 +59,9 @@ Below is the code to execute the skeletonization algorithm with a downloaded exa
 extraction an animation with the original point cloud and the skeleton is created and exported as a gif. Both LBC and
 S-LBC extract
 
-* contracted point cloud
+* contracted point cloud (````o3d.geometry.PointCloud```` )
+* topologic important points (````o3d.geometry.LineSet```` )
+* topology as a graph (````Networkx.Graph````)
 
 #### Download Example Dataset
 
@@ -179,7 +186,7 @@ found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacian
 The Minimum Spanning Tree is computed via  [Mistree](https://arxiv.org/pdf/1910.08562.pdf) a
 open-source implementation which can be found here [code](https://github.com/knaidoo29/mistree).
 
-## Troubleshooting
+## :interrobang: Troubleshooting
 
 For Windows users, there might be issues installing the `mistree` library via `python -m pip install mistree` command.
 If you get an error message that the Fortran compiler cannot be found, please try the following:
@@ -192,14 +199,14 @@ If you get an error message that the Fortran compiler cannot be found, please tr
   here: https://github.com/knaidoo29/mistree/issues/14#issuecomment-1275022276
 - Now the PC-Skeletor should be running on your Windows machine.
 
-## Limitation / Improvements
+## :heavy_exclamation_mark: Limitation / Improvements
 
 - [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) of point clouds
 - [ ] Point2Skeleton
 - [ ] Test code
 - [ ] Remove torch from implementation and all cuda stuff
 
-# Citation
+# 📖 Citation
 
 Please cite this [[Paper](https://google.de)] if this work helps you with your research:
 

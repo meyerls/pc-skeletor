@@ -19,7 +19,7 @@ if __name__ == "__main__":
               down_sample=0.005)
     lbc.extract_skeleton()
     lbc.extract_topology()
-    #lbc.visualize()
+    lbc.visualize()
     lbc.save('./output')
     lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=500, output='./output')
 
@@ -31,6 +31,6 @@ if __name__ == "__main__":
                  down_sample=0.005)
     s_lbc.extract_skeleton()
     s_lbc.extract_topology()
-    #s_lbc.visualize()
+    s_lbc.visualize()
     s_lbc.save('./output')
     s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=500, output='./output')

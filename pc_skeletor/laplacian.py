@@ -82,7 +82,13 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         self.graph_k_n = 15
 
-    def set_amplification(self):
+    def set_amplification(self, test):
+        """
+
+        :param test:
+        :return:
+        """
+
         # Set amplification factor of contraction weights.
         if isinstance(self.step_wise_contraction_amplification, str):
             if self.step_wise_contraction_amplification == 'auto':
