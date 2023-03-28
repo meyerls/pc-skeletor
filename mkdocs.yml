@@ -1,4 +1,7 @@
 site_name: PC-Skeletor
-site_url: https://example.com/
-
+nav:
+  - Home: index.md
+  - LBC: laplacian.md
+plugins:
+  - mkdocstrings
 theme: readthedocs
