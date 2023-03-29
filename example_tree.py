@@ -12,17 +12,16 @@ if __name__ == "__main__":
     pcd_branch = o3d.io.read_point_cloud(branch_pcd_path)
     pcd = pcd_trunk + pcd_branch
 
-    if False:
-        # Laplacian-based Contraction
-        lbc = LBC(point_cloud=pcd,
-                  init_contraction=2,
-                  init_attraction=0.2,
-                  down_sample=0.005)
-        lbc.extract_skeleton()
-        lbc.extract_topology()
-        lbc.visualize()
-        lbc.save('./output')
-        lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=500, output='./output')
+    # Laplacian-based Contraction
+    lbc = LBC(point_cloud=pcd,
+              init_contraction=2,
+              init_attraction=0.01,
+              down_sample=0.05)
+    lbc.extract_skeleton()
+    lbc.extract_topology()
+    lbc.visualize()
+    lbc.save('./output')
+    lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=500, output='./output')
 
     # Semantic Laplacian-based Contraction
     s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch},

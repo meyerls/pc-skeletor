@@ -8,7 +8,7 @@ See LICENSE file for more information.
 # Built-in/Generic Imports
 from typing import Union
 from copy import deepcopy
-
+import warnings
 import open3d.geometry
 # Libs
 import open3d.visualization as o3d
@@ -40,6 +40,19 @@ class LaplacianBasedContractionBase(SkeletonBase):
                  verbose: bool,
                  contraction_type):
         super().__init__(verbose, debug)
+
+        if init_attraction == 0 and init_contraction == 0:
+            raise ValueError(
+                'Both initial parameters (init_attraction and init_contraction) are set to 0. This is an invalid set'
+                'of values. e.g. init_attraction=0.5 and init_contraction=1. Exiting.')
+        elif init_attraction == 0:
+            raise ValueError(
+                'The attraction term is set to 0. This leads to a point cloud contracted in the coordinate origin. Exiting.')
+        elif init_contraction / (init_attraction + 1e-12) > 1e6 and init_contraction != 0:
+            raise ValueError(
+                'The ratio between init_attraction and init_contraction is to large! This results in a point cloud '
+                'contracted to the coordinate origin. Please set the value more balanced (max. 1e6!). Current ratio:'
+                ' {}. Exiting.'.format(init_attraction / init_contraction))
 
         # Name of the algorithm
         self.algo_type = algo_type
@@ -225,6 +238,7 @@ class LaplacianBasedContractionBase(SkeletonBase):
         # Artifacts at zero
         pcd_contracted_tree = o3d.geometry.KDTreeFlann(self.contracted_point_cloud)
         idx_near_zero = np.argmin(np.linalg.norm(np.asarray(contracted_point_cloud_zero_artifact.points), axis=1))
+        # Todo: error hear
         [k, idx, _] = pcd_contracted_tree.search_radius_vector_3d(
             contracted_point_cloud_zero_artifact.points[idx_near_zero], 0.01)
 
@@ -294,7 +308,7 @@ class LBC(LaplacianBasedContractionBase):
 
     def __init__(self,
                  point_cloud: Union[str, open3d.geometry.PointCloud],
-                 init_contraction: float = 1,
+                 init_contraction: float = 1.,
                  init_attraction: float = 0.5,
                  max_contraction: int = 2048,
                  max_attraction: int = 1024,
@@ -389,7 +403,7 @@ class SLBC(LaplacianBasedContractionBase):
     def __init__(self,
                  point_cloud: Union[str, open3d.geometry.PointCloud],
                  semantic_weighting: float = 10.,
-                 init_contraction: float = 1,
+                 init_contraction: float = 1.,
                  init_attraction: float = 0.5,
                  max_contraction: int = 2048,
                  max_attraction: int = 1024,

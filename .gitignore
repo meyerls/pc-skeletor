@@ -1,6 +1,7 @@
 data
 pc_skeletor/data
 .idea
+.pytest_cache
 **/ __pycache__
 skeletor.egg-info
 build

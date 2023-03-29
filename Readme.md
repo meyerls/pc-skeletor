@@ -36,13 +36,13 @@ information of the point cloud into the contraction algorithm.
 First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed
 via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
 
- ````bash
+ ````sh
 pip install pc-skeletor
  ````
 
 ### Installation from Source
 
- ````bash
+ ````sh
 git clone https://github.com/meyerls/pc_skeletor.git
 cd pc_skeletor
 pip install --upgrade pip setuptools
