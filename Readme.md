@@ -109,11 +109,11 @@ s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300,
 <table>
   <tr>
     <td align="center">
-        Contracted Point Cloud
+        Skeleton
         <img src="img/contracted.gif" alt="Image 1">
     </td>
     <td align="center">
-        Topology Line Set
+        Topology 
         <img src="img/topology.gif" alt="Image 2">
     </td>
     <td align="center">
