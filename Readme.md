@@ -118,11 +118,11 @@ s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300,
     </td>
     <td align="center">
         Skeletal Graph
-        <img src="img/topology_graph.png" width="500px">
+        <img src="img/topology_graph.png" width="600px">
     </td>
     <td align="center">
         Topology Graph
-        <img src="img/skeletal_graph.png" width="500px">
+        <img src="img/skeletal_graph.png" width="600px">
     </td>
   </tr>
 </table>
