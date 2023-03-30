@@ -9,6 +9,7 @@ See LICENSE file for more information.
 import logging
 from copy import copy
 
+import networkx
 from scipy.spatial.transform import Rotation as R
 import networkx as nx
 
@@ -25,16 +26,19 @@ class SkeletonBase(object):
         else:
             logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
-        # Skeleton output
+        ## Skeleton output
+        # Original point cloud
         self.pcd: o3d.geometry.PointCloud = o3d.geometry.PointCloud()
         # Contracted Point Cloud with same numbers of points as pcd
         self.contracted_point_cloud: o3d.geometry.PointCloud = o3d.geometry.PointCloud()
         # Skeleton of the pcd, but same shape as contracted_point_cloud but down sampled
         self.skeleton: o3d.geometry.PointCloud = o3d.geometry.PointCloud()
-        # Graph of self.skeleton
-        self.graph: nx.Graph = nx.Graph()
+        # Graph of skeleton
+        self.skeleton_graph: nx.Graph = nx.Graph()
         # Topology of simplified graph
         self.topology: o3d.geometry.LineSet = o3d.geometry.LineSet()
+        # Graph of topology
+        self.topology_graph: nx.Graph = nx.Graph()
 
     def extract_skeleton(self):
         pass
@@ -44,6 +48,19 @@ class SkeletonBase(object):
 
     def save(self, *args):
         pass
+
+    def show_graph(self, graph: networkx.Graph, pos: Union[np.ndarray, bool] = True, fig_size: tuple = (20, 20)):
+        # For more info: https://networkx.org/documentation/stable/reference/drawing.html
+
+        plt.figure(figsize=fig_size)
+
+        if pos:
+            pos = [graph.nodes()[node_idx]['pos'] for node_idx in range(graph.number_of_nodes())]
+            nx.draw_networkx(G=graph, pos=np.asarray(pos)[:, [0, 2]])
+        else:
+            nx.draw(G=graph)
+
+        plt.show()
 
     def animate_contracted_pcd(self,
                                init_rot: np.ndarray = np.eye(3),
@@ -105,10 +122,10 @@ class SkeletonBase(object):
         generate_gif(filenames=image_path_list, output_name='contracted_skeleton_animation')
 
     def animate_topology(self,
-                init_rot: np.ndarray = np.eye(3),
-                steps: int = 360,
-                point_size: float = 1.0,
-                output: [str, None] = None):
+                         init_rot: np.ndarray = np.eye(3),
+                         steps: int = 360,
+                         point_size: float = 1.0,
+                         output: [str, None] = None):
         """
             Creates an animation of a point cloud. The point cloud is simply rotated by 360 Degree in multpile steps.
 
@@ -121,7 +138,6 @@ class SkeletonBase(object):
         """
         output_folder = os.path.join(output, './tmp_{}'.format(time.time_ns()))
         os.mkdir(output_folder)
-
 
         topo = copy(self.topology)
         topo.paint_uniform_color([0, 0, 0])

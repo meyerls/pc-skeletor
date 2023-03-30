@@ -6,15 +6,13 @@ Licensed under the MIT License.
 See LICENSE file for more information.
 """
 # Built-in/Generic Imports
-from typing import Union
 from copy import deepcopy
-import warnings
+
 import open3d.geometry
 # Libs
 import open3d.visualization as o3d
 import robust_laplacian
 import mistree as mist
-
 # Own modules
 from pc_skeletor.download import *
 from pc_skeletor.base import *
@@ -232,18 +230,46 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         return pcd_points_current
 
+    def __extract_skeletal_graph(self, skeletal_points: np.ndarray):
+        def extract_mst(points: np.ndarray):
+            mst = mist.GetMST(x=points[:, 0], y=points[:, 1], z=points[:, 2])
+            degree, edge_length, branch_length, branch_shape, edge_index, branch_index = mst.get_stats(include_index=True, k_neighbours=self.graph_k_n)
+
+            return degree, edge_length, branch_length, branch_shape, edge_index, branch_index
+
+        _, _, _, _, edge_index, _ = extract_mst(points=skeletal_points)
+
+        # Convert to Graph
+        mst_graph = nx.Graph(edge_index.T.tolist())
+        for idx in range(mst_graph.number_of_nodes()):
+            mst_graph.nodes[idx]['pos'] = skeletal_points[idx].T
+
+        return mst_graph
+
+    def __simplify_graph(self, graph):
+
+        G_simplified, node_pos, node_idx = simplify_graph(graph)
+        skeleton_cleaned = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(np.vstack(node_pos)))
+        skeleton_cleaned.paint_uniform_color([0, 0, 1])
+        skeleton_cleaned_points = np.asarray(skeleton_cleaned.points)
+
+        mapping = {}
+        for node in G_simplified:
+            pcd_idx = np.where(skeleton_cleaned_points == G_simplified.nodes[node]['pos'])[0][0]
+            mapping.update({node: pcd_idx})
+
+        return nx.relabel_nodes(G_simplified, mapping), skeleton_cleaned_points
+
     def extract_topology(self):
         contracted_point_cloud_zero_artifact = deepcopy(self.contracted_point_cloud)
 
         # Artifacts at zero
         pcd_contracted_tree = o3d.geometry.KDTreeFlann(self.contracted_point_cloud)
         idx_near_zero = np.argmin(np.linalg.norm(np.asarray(contracted_point_cloud_zero_artifact.points), axis=1))
-        # Todo: error hear
-        [k, idx, _] = pcd_contracted_tree.search_radius_vector_3d(
-            contracted_point_cloud_zero_artifact.points[idx_near_zero], 0.01)
-
-        self.contracted_point_cloud = contracted_point_cloud_zero_artifact.select_by_index(idx, invert=True)
-
+        if np.linalg.norm(contracted_point_cloud_zero_artifact.points[idx_near_zero]) <= 0.01:
+            [k, idx, _] = pcd_contracted_tree.search_radius_vector_3d(
+                contracted_point_cloud_zero_artifact.points[idx_near_zero], 0.01)
+            self.contracted_point_cloud = contracted_point_cloud_zero_artifact.select_by_index(idx, invert=True)
         contracted_point_cloud = np.asarray(self.contracted_point_cloud.points)
 
         # Compute points for farthest point sampling
@@ -257,29 +283,12 @@ class LaplacianBasedContractionBase(SkeletonBase):
         if (np.isnan(contracted_point_cloud)).all():
             print('Element is NaN!')
 
-        mst = mist.GetMST(x=skeleton_points[:, 0], y=skeleton_points[:, 1], z=skeleton_points[:, 2])
-        d, l, b, s, l_index, b_index = mst.get_stats(include_index=True, k_neighbours=self.graph_k_n)
-
-        # Convert to Graph
-        mst = nx.Graph(l_index.T.tolist())
-        for idx in range(mst.number_of_nodes()):
-            mst.nodes[idx]['pos'] = skeleton_points[idx].T
-
-        G_simplified, node_pos, node_idx = simplify_graph(mst)
-        skeleton_cleaned = o3d.geometry.PointCloud(o3d.utility.Vector3dVector(np.vstack(node_pos)))
-        skeleton_cleaned.paint_uniform_color([0, 0, 1])
-        skeleton_cleaned_points = np.asarray(skeleton_cleaned.points)
-
-        mapping = {}
-        for node in G_simplified:
-            pcd_idx = np.where(skeleton_cleaned_points == G_simplified.nodes[node]['pos'])[0][0]
-            mapping.update({node: pcd_idx})
-
-        self.graph = nx.relabel_nodes(G_simplified, mapping)
+        self.skeleton_graph = self.__extract_skeletal_graph(skeletal_points=skeleton_points)
+        self.topology_graph, topology_points = self.__simplify_graph(graph=self.skeleton_graph)
 
         self.topology = o3d.geometry.LineSet()
-        self.topology.points = o3d.utility.Vector3dVector(skeleton_cleaned_points)
-        self.topology.lines = o3d.utility.Vector2iVector(list((self.graph.edges())))
+        self.topology.points = o3d.utility.Vector3dVector(topology_points)
+        self.topology.lines = o3d.utility.Vector2iVector(list((self.topology_graph.edges())))
 
         return self.topology
 

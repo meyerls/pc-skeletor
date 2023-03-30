@@ -52,23 +52,8 @@ pip install -e .
 
 ### Basic Usage
 
-Below is the code to execute the skeletonization algorithm with a downloaded example point cloud. Additionally, to the
-extraction an animation with the original point cloud and the skeleton is created and exported as a gif. Both LBC and
-S-LBC extract
-
-* contracted point cloud (````o3d.geometry.PointCloud```` )
-
-<img src="img/contracted.gif" width='40%'>
-
-
-* topologic as a line set (````o3d.geometry.LineSet```` )
-
-<img src="img/topology.gif" width='40%'>
-
-
-* topology as a graph (````Networkx.Graph````)
-
-
+The following code performs the skeletonization algorithm on a downloaded point cloud example. It also generates an 
+animation that includes the original point cloud and the resulting skeleton, which is exported as a gif.
 
 
 #### Download Example Dataset
@@ -119,6 +104,36 @@ s_lbc.save('./output')
 s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 ````
 
+#### Output
+
+<table>
+  <tr>
+    <td align="center">
+        Contracted Point Cloud
+        <img src="img/contracted.gif" alt="Image 1">
+    </td>
+    <td align="center">
+        Topology Line Set
+        <img src="img/topology.gif" alt="Image 2">
+    </td>
+    <td align="center">
+        Skeletal Graph
+        <img src="img/topology_graph.png.png" alt="Image 2">
+    </td>
+    <td align="center">
+        Topology Graph
+        <img src="img/skeletal_graph.png.png" alt="Image 2">
+    </td>
+  </tr>
+</table>
+
+````python
+lbc.contracted_point_cloud: o3d.geometry.PointCloud
+lbc.skeleton: o3d.geometry.PointCloud
+lbc.skeleton_graph: networkx.nx
+lbc.topology: o3d.geometry.LineSet
+lbc.topology_graph: networkx.nx
+````
 
 ## Ω Parametrization
 
@@ -210,10 +225,10 @@ If you get an error message that the Fortran compiler cannot be found, please tr
 
 ## :heavy_exclamation_mark: Limitation / Improvements
 
-- [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) of point clouds
 - [ ] Implement [Point2Skeleton](https://arxiv.org/pdf/2012.00230.pdf)
 - [ ] Implement [L1-Medial Skeleton](https://www.cs.sfu.ca/~haoz/pubs/huang_sig13_l1skel.pdf) 
 - [ ] Test code
+- [ ] Improve graph representation
 
 # 📖 Citation
 
