@@ -208,7 +208,7 @@ found in the [robust-laplacians-py](https://github.com/nmwsharp/robust-laplacian
 #### Minimum Spanning Tree
 
 The Minimum Spanning Tree is computed via  [Mistree](https://arxiv.org/pdf/1910.08562.pdf) a
-open-source implementation which can be found here [code](https://github.com/knaidoo29/mistree).
+open-source implementation which can be found [here](https://github.com/knaidoo29/mistree).
 
 ## :interrobang: Troubleshooting
 
