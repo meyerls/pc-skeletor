@@ -12,3 +12,5 @@ img/contracted.gif filter=lfs diff=lfs merge=lfs -text
 img/topology.gif filter=lfs diff=lfs merge=lfs -text
 img/skeletal_graph.png filter=lfs diff=lfs merge=lfs -text
 img/topology_graph.png filter=lfs diff=lfs merge=lfs -text
+img/contracted_cropped.gif filter=lfs diff=lfs merge=lfs -text
+img/topology_cropped.gif filter=lfs diff=lfs merge=lfs -text
