@@ -18,6 +18,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: 'Install dependencies'
         run: |
+          chmod u+x setup_env.sh
           ./setup_env.sh
           pip install .
       - name: 'Test PC Skeletor'
