@@ -5,6 +5,7 @@ Copyright (c) 2022 Lukas Meyer
 Licensed under the MIT License.
 See LICENSE file for more information.
 """
+import logging
 # Built-in/Generic Imports
 from copy import deepcopy
 
@@ -383,7 +384,7 @@ class LBC(LaplacianBasedContractionBase):
         ret = np.vstack([x, y, z]).T
 
         if (np.isnan(ret)).all():
-            logging.WARNING('Matrix is exactly singular. Stopping Contraction.')
+            logging.warn('Matrix is exactly singular. Stopping Contraction.')
             ret = pcd_points
 
         if self.debug:

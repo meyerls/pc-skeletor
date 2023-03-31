@@ -19,18 +19,12 @@ jobs:
       - name: 'Install dependencies'
         run: |
           python -m pip install --upgrade pip
+          pip install --upgrade pip setuptools
           pip install mistree==1.2.0
           pip install .
       - name: 'Test PC Skeletor'
         run: |
-          cd pc_skeletor
-          python test.py
+          pytest .
           ls -la 
           ls -la ${{ github.workspace }}
           pwd
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: skeleton-artifact
-          path: ${{ github.workspace }}/pc_skeletor/data/**/*
-          retention-days: 5
