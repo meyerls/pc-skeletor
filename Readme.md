@@ -1,4 +1,4 @@
-# PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="img/PCSkeletor.png">
+# PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/PCSkeletor.png">
 
 <a href="https://img.shields.io/pypi/pyversions/pc_skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc_skeletor"></a>
 <a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/PC-Skeletor"></a>
@@ -20,11 +20,11 @@ information of the point cloud into the contraction algorithm.
   <tr>
     <td align="center">
         <h4>Laplacian-Based Contraction (LBC)</h4>
-        <img src="img/lbc.gif" alt="Image 1">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/lbc.gif" alt="Image 1">
     </td>
     <td align="center">
         <h4>Semantic LBC (S-LBC)</h4>
-        <img src="img/s_lbc.gif" alt="Image 2">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/s_lbc.gif" alt="Image 2">
     </td>
   </tr>
 </table>
@@ -114,19 +114,19 @@ s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300,
   <tr>
     <td align="center">
         Skeleton
-        <img src="img/contracted_cropped.gif" width="170px">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/contracted_cropped.gif" width="170px">
     </td>
     <td align="center">
         Topology 
-        <img src="img/topology_cropped.gif" width="170px">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/topology_cropped.gif" width="170px">
     </td>
     <td align="center">
         Skeletal Graph
-        <img src="img/topology_graph_cropped.png" width="600px">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/topology_graph_cropped.png" width="600px">
     </td>
     <td align="center">
         Topology Graph
-        <img src="img/skeletal_graph_cropped.png" width="600px">
+        <img src="https://media.githubusercontent.com/media/meyerls/pc_skeletor/slbc/img/skeletal_graph_cropped.png" width="600px">
     </td>
   </tr>
 </table>

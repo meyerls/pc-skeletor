@@ -18,8 +18,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: 'Install dependencies'
         run: |
-          chmod u+x setup_env.sh
-          ./setup_env.sh
+          conda create --name s-lbc python=3.8 -y
+          conda activate s-lbc
+          pip install --upgrade pip setuptools
+          pip install -r requirements.txt
           pip install .
       - name: 'Test PC Skeletor'
         run: |
