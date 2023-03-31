@@ -19,6 +19,7 @@ jobs:
       - name: 'Install dependencies'
         run: |
           pip install pip==21.3.1
+          pip install numpy --use-deprecated=legacy-resolver
           pip install --upgrade pip setuptools
           git clone https://github.com/meyerls/mistree.git
           cd mistree 
