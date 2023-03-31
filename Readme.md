@@ -110,19 +110,19 @@ s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300,
   <tr>
     <td align="center">
         Skeleton
-        <img src="img/contracted_cropped.gif" alt="Image 1">
+        <img src="img/contracted_cropped.gif" width="600px">
     </td>
     <td align="center">
         Topology 
-        <img src="img/topology_cropped.gif" alt="Image 2">
+        <img src="img/topology_cropped.gif" width="600px">
     </td>
     <td align="center">
         Skeletal Graph
-        <img src="img/topology_graph.png" width="600px">
+        <img src="img/topology_graph_cropped.png" width="600px">
     </td>
     <td align="center">
         Topology Graph
-        <img src="img/skeletal_graph.png" width="600px">
+        <img src="img/skeletal_graph_cropped.png" width="600px">
     </td>
   </tr>
 </table>
