@@ -19,6 +19,10 @@ jobs:
       - name: 'Install dependencies'
         run: |
           pip install --upgrade pip setuptools
+          git clone https://github.com/meyerls/mistree.git
+          cd mistree 
+          pip install -e .
+          cd ..
           pip install -r requirements.txt
           pip install .
       - name: 'Test PC Skeletor'
