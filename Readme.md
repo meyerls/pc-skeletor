@@ -239,7 +239,14 @@ If you get an error message that the Fortran compiler cannot be found, please tr
 Please cite this [[Paper](https://google.de)] if this work helps you with your research:
 
 ```
-tbd
+@InProceedings{Meyer_2023_CVPR,
+    author    = {Meyer, Lukas and Gilson, Andreas and Scholz, Oliver and Stamminger, Marc},
+    title     = {CherryPicker: Semantic Skeletonization and Topological Reconstruction of Cherry Trees},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2023},
+    pages     = {tbd}
+}
 ```
 
 
