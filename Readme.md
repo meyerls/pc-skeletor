@@ -1,8 +1,10 @@
 # PC Skeletor - Point Cloud Skeletonization <img align="right" height="250" src="https://media.githubusercontent.com/media/meyerls/pc-skeletor/slbc/img/PCSkeletor.png">
 
-<a href="https://img.shields.io/pypi/pyversions/pc-skeletor"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc-skeletor"></a>
-<a href="https://github.com/meyerls/PC-Skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/pc-skeletor"></a>
+<a href="https://pypi.org/project/pc-skeletor/"><img alt="PyPI" src="https://img.shields.io/pypi/v/pc-skeletor"></a>
+<a href="https://pypi.org/project/pc-skeletor/"><img alt="PyPI - Python Version" src="https://img.shields.io/pypi/pyversions/pc-skeletor"></a>
+<a href="https://github.com/meyerls/pc-skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/pc-skeletor"></a>
 <!--a href="https://github.com/meyerls/pc-skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/pc-skeletor/Python%20package"></a-->
+
 **PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://google.de).
