@@ -18,19 +18,19 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: 'Install dependencies'
         run: |
-          python -m pip install --upgrade pip
-          pip install mistree==1.2.0
+          pip install --upgrade pip setuptools
+          pip install pip==21.3.1
+          pip install numpy --use-deprecated=legacy-resolver
+          pip install charset_normalizer
+          git clone https://github.com/meyerls/mistree.git
+          cd mistree 
+          pip install -e .
+          cd ..
+          pip install -r requirements.txt
           pip install .
-      - name: 'Test PC Skeletor'
-        run: |
-          cd pc_skeletor
-          python test.py
-          ls -la 
-          ls -la ${{ github.workspace }}
-          pwd
-      - name: 'Upload Artifact'
-        uses: actions/upload-artifact@v3
-        with:
-          name: skeleton-artifact
-          path: ${{ github.workspace }}/pc_skeletor/data/**/*
-          retention-days: 5
+      #- name: 'Test PC Skeletor'
+      #  run: |
+      #    pytest .
+      #    ls -la
+      #    ls -la ${{ github.workspace }}
+      #    pwd

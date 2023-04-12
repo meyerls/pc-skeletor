@@ -12,8 +12,10 @@ See LICENSE file for more information.
 # Libs
 import os
 from zipfile import ZipFile
-from tqdm import tqdm
 import urllib.request
+import glob
+
+from tqdm import tqdm
 
 # Own modules
 # ...
@@ -82,7 +84,7 @@ class Dataset:
 
         self.url = 'https://faubox.rrze.uni-erlangen.de/dl/fiY7DMQ5TgQwoA1LvedgRu/tree.zip'
 
-        self.dataset_name ='tree'
+        self.dataset_name = 'tree'
 
         existence = self.__check_existence(output_directory=output_path, dataset_name=self.dataset_name)
 
@@ -96,9 +98,32 @@ class Dataset:
             os.path.join(self.data_path, self.url.split('/')[-1].split('.zip')[0] + '.ply'))
         return self.file_path
 
+    def download_semantic_tree_dataset(self, output_path: str = os.path.abspath(__file__), overwrite: bool = False):
+
+        self.url = 'https://faubox.rrze.uni-erlangen.de/dl/fiCVjuo7hpxcacu1dWEmr9/semantic_tree.zip'
+
+        self.dataset_name = 'semantic tree'
+
+        existence = self.__check_existence(output_directory=output_path, dataset_name=self.dataset_name)
+
+        if existence == NON_EXIST:
+            self.filename = download(url=self.url, output_dir=self.data_path, overwrite=overwrite)
+            extract(filename=self.filename, output_dir=self.data_path)
+        else:
+            print('Dataset {} already exists at location {}'.format(self.dataset_name, self.data_path))
+
+        self.file_paths = glob.glob(
+            os.path.join(self.data_path, self.url.split('/')[-1].split('.zip')[0] + '/*' + '.ply'))
+        return self.file_paths
+
 
 if __name__ == '__main__':
     downloader = Dataset()
-    downloader.download_tree_dataset()
+    file = downloader.download_tree_dataset()
+
+    print('Saved at {}'.format(downloader.dataset_path))
+
+    downloader = Dataset()
+    file1, file2 = downloader.download_semantic_tree_dataset()
 
     print('Saved at {}'.format(downloader.dataset_path))
