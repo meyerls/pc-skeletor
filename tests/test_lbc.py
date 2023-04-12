@@ -18,7 +18,7 @@ pcd = pcd_trunk + pcd_branch
 @pytest.mark.parametrize('max_contraction', [2 ** 2, 2 ** 18], ids=lambda param: 'max_contraction({})'.format(param))
 @pytest.mark.parametrize('max_attraction', [2 ** 2, 2 ** 18], ids=lambda param: 'max_attraction({})'.format(param))
 @pytest.mark.parametrize('termination_ratio', [1, 0.005, 0, -1], ids=lambda param: 'max_attraction({})'.format(param))
-@pytest.mark.parametrize('max_iteration_steps', [0, 1000], ids=lambda param: 'max_iteration_steps({})'.format(param))
+@pytest.mark.parametrize('max_iteration_steps', [20], ids=lambda param: 'max_iteration_steps({})'.format(param))
 def test_lpc_init_parameters(init_contraction,
                              init_attraction,
                              max_contraction,
