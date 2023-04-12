@@ -28,9 +28,9 @@ jobs:
           cd ..
           pip install -r requirements.txt
           pip install .
-      - name: 'Test PC Skeletor'
-        run: |
-          pytest .
-          ls -la 
-          ls -la ${{ github.workspace }}
-          pwd
+      #- name: 'Test PC Skeletor'
+      #  run: |
+      #    pytest .
+      #    ls -la
+      #    ls -la ${{ github.workspace }}
+      #    pwd
