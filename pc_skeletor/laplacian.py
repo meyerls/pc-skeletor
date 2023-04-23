@@ -5,15 +5,15 @@ Copyright (c) 2022 Lukas Meyer
 Licensed under the MIT License.
 See LICENSE file for more information.
 """
-import logging
 # Built-in/Generic Imports
 from copy import deepcopy
 
-import open3d.geometry
+import open3d
 # Libs
 import open3d.visualization as o3d
 import robust_laplacian
 import mistree as mist
+
 # Own modules
 from pc_skeletor.download import *
 from pc_skeletor.base import *
@@ -234,7 +234,8 @@ class LaplacianBasedContractionBase(SkeletonBase):
     def __extract_skeletal_graph(self, skeletal_points: np.ndarray):
         def extract_mst(points: np.ndarray):
             mst = mist.GetMST(x=points[:, 0], y=points[:, 1], z=points[:, 2])
-            degree, edge_length, branch_length, branch_shape, edge_index, branch_index = mst.get_stats(include_index=True, k_neighbours=self.graph_k_n)
+            degree, edge_length, branch_length, branch_shape, edge_index, branch_index = mst.get_stats(
+                include_index=True, k_neighbours=self.graph_k_n)
 
             return degree, edge_length, branch_length, branch_shape, edge_index, branch_index
 
@@ -303,6 +304,12 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         path_topology = os.path.join(output, '03_topology_{}'.format(self.algo_type) + '.ply')
         o3d.io.write_line_set(path_topology, self.topology)
+
+        path_skeleton_graph = os.path.join(output, '04_skeleton_graph_{}'.format(self.algo_type) + '.gpickle')
+        nx.write_gpickle(self.skeleton_graph, path_skeleton_graph)
+
+        path_topology_graph = os.path.join(output, '05_topology_graph_{}'.format(self.algo_type) + '.gpickle')
+        nx.write_gpickle(self.skeleton_graph, path_topology_graph)
 
 
 class LBC(LaplacianBasedContractionBase):
@@ -525,17 +532,21 @@ if __name__ == "__main__":
     pcd = pcd_trunk + pcd_branch
 
     # Laplacian-based Contraction
-    lbc = LBC(point_cloud=pcd, down_sample=0.03)
+    lbc = LBC(point_cloud=pcd, down_sample=0.01)
     lbc.extract_skeleton()
     lbc.extract_topology()
+    lbc.show_graph(lbc.skeleton_graph)
+    lbc.show_graph(lbc.topology_graph)
     lbc.visualize()
     lbc.save('./output')
     lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 
     # Semantic Laplacian-based Contraction
-    s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.03)
+    s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01)
     s_lbc.extract_skeleton()
     s_lbc.extract_topology()
+    s_lbc.show_graph(s_lbc.skeleton_graph)
+    s_lbc.show_graph(s_lbc.topology_graph)
     s_lbc.visualize()
     s_lbc.save('./output')
     s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
