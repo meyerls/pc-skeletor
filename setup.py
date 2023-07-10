@@ -29,7 +29,7 @@ setuptools.setup(
                       "numpy",
                       "scipy",
                       "matplotlib",
-                      "open3d==0.15.1",
+                      "open3d==0.16",
                       "robust_laplacian==0.2.4",
                       "dgl",
                       "torch",
