@@ -58,16 +58,16 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         # Set or load point cloud to apply algorithm
         if isinstance(point_cloud, str):
-            self.pcd: o3d.geometry.PointCloud = load_pcd(filename=point_cloud, normalize=False)
+            self.pcd: o3d.geometry.PointCloud = load_pcd(filename=point_cloud)
         elif isinstance(point_cloud, dict):
             # Currently only two classes are supported!
             if isinstance(point_cloud['trunk'], str):
-                self.trunk: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['trunk'], normalize=False)
+                self.trunk: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['trunk'])
             else:
                 self.trunk: o3d.geometry.PointCloud = point_cloud['trunk']
 
             if isinstance(point_cloud['branches'], str):
-                self.branches: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['branches'], normalize=False)
+                self.branches: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['branches'])
             else:
                 self.branches: o3d.geometry.PointCloud = point_cloud['branches']
         elif isinstance(point_cloud, open3d.geometry.PointCloud):
@@ -300,16 +300,16 @@ class LaplacianBasedContractionBase(SkeletonBase):
         o3d.io.write_point_cloud(path_contracted_pcd, self.contracted_point_cloud)
 
         path_skeleton = os.path.join(output, '02_skeleton_{}'.format(self.algo_type) + '.ply')
-        o3d.io.write_point_cloud(path_skeleton, self.skeleton)
+        o3d.io.write_point_cloud(filename=path_skeleton, line_set=self.skeleton)
 
         path_topology = os.path.join(output, '03_topology_{}'.format(self.algo_type) + '.ply')
-        o3d.io.write_line_set(path_topology, self.topology)
+        o3d.io.write_line_set(filename=path_topology, line_set=self.topology)
 
         path_skeleton_graph = os.path.join(output, '04_skeleton_graph_{}'.format(self.algo_type) + '.gpickle')
-        nx.write_gpickle(self.skeleton_graph, path_skeleton_graph)
+        nx.write_gpickle(G=self.skeleton_graph, path=path_skeleton_graph)
 
         path_topology_graph = os.path.join(output, '05_topology_graph_{}'.format(self.algo_type) + '.gpickle')
-        nx.write_gpickle(self.skeleton_graph, path_topology_graph)
+        nx.write_gpickle(G=self.topology_graph, path=path_topology_graph)
 
 
 class LBC(LaplacianBasedContractionBase):
@@ -531,22 +531,28 @@ if __name__ == "__main__":
     pcd_branch = o3d.io.read_point_cloud(branch_pcd_path)
     pcd = pcd_trunk + pcd_branch
 
+    pcd = o3d.io.read_point_cloud("/home/luigi/Documents/reco/23_04_14/02/tree.ply")
     # Laplacian-based Contraction
-    lbc = LBC(point_cloud=pcd, down_sample=0.01)
+    lbc = LBC(point_cloud=pcd, init_contraction=3.,
+              init_attraction=0.6,
+              max_contraction=2048,
+              max_attraction=1024,
+              down_sample=0.007)
     lbc.extract_skeleton()
     lbc.extract_topology()
     lbc.show_graph(lbc.skeleton_graph)
     lbc.show_graph(lbc.topology_graph)
     lbc.visualize()
-    lbc.save('./output')
-    lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+    lbc.save('./output_3')
+    # lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output_1')
 
-    # Semantic Laplacian-based Contraction
-    s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01)
-    s_lbc.extract_skeleton()
-    s_lbc.extract_topology()
-    s_lbc.show_graph(s_lbc.skeleton_graph)
-    s_lbc.show_graph(s_lbc.topology_graph)
-    s_lbc.visualize()
-    s_lbc.save('./output')
-    s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+    if False:
+        # Semantic Laplacian-based Contraction
+        s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01)
+        s_lbc.extract_skeleton()
+        s_lbc.extract_topology()
+        s_lbc.show_graph(s_lbc.skeleton_graph)
+        s_lbc.show_graph(s_lbc.topology_graph)
+        s_lbc.visualize()
+        s_lbc.save('./output')
+        s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
