@@ -8,6 +8,7 @@ See LICENSE file for more information.
 
 # Built-in/Generic Imports
 import setuptools
+from setuptools import find_packages
 from os import path
 
 this_directory = path.abspath(path.dirname(__file__))
@@ -24,9 +25,8 @@ setuptools.setup(
     author='Lukas Meyer',
     author_email='lukas.meyer@fau.de',
     url="https://github.com/meyerls/PC-Skeletor",
-    packages=['pc_skeletor'],
+    packages=find_packages(),
     install_requires=[#"mistree==1.2.1",
-                      "mistree @ git+https://github.com/meyerls/mistree.git",
                       "numpy",
                       "scipy",
                       "matplotlib",
