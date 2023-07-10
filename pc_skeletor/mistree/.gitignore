@@ -1,0 +1,58 @@
+mistree/*.pyc
+mistree/coordinates/*.pyc
+mistree/levy_flight/*.pyc
+mistree/mst/*.pyc
+mistree/tests/*.pyc
+mistree/tests/__pycache__/*
+
+*__pycache__
+
+mistree/levy_flight/*.so
+mistree/mst/*.so
+
+tutorials/notebooks/.ipynb_checkpoints/*
+
+# Ignore Mac DS_Store files
+*.DS_Store
+.DS_Store
+
+# Ignore ipynb checkpoints
+*.ipynb_checkpoints/*
+.ipynb_checkpoints/*
+*.dSYM/*
+
+# remove python 3
+mistree/__pycache__/*
+mistree/coordinate_utility/__pycache__/*
+mistree/coordinate_utility/*.so.dSYM/*
+mistree/levy_flight/__pycache__/*
+mistree/levy_flight/*.so.dSYM/*
+mistree/mst/utility_random_walk/*
+mistree/mst/*.so.dSYM/*
+mistree/mst/__pycache__/*
+mistree/mst/utility_density/*
+mistree/mst/utility_mst/*
+mistree/tests/__pycache__/*
+
+# remove build
+build/*
+dist/*
+mistree.egg-info/*
+
+# remove paper JOSS for now
+paper/Makefile
+paper/*.png
+paper/*.template
+paper/*.aux
+paper/*.bcf
+paper/*.log
+paper/*.out
+paper/*.pdf
+paper/*.run.xml
+paper/*.tex
+paper/*.py
+paper/*.blg
+paper/*.bbl
+
+# remove paper entirely now that it has been published
+paper/*

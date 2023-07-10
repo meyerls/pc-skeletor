@@ -1,0 +1,26 @@
+language: python
+
+cache: pip
+
+services:
+  - xvfb
+
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+
+before_install:
+  - sudo apt-get install gfortran
+
+install:
+  - pip install -r requirements.txt
+  - pip install codecov
+  - pip install .
+
+script: python setup.py test
+
+after_success:
+  - coverage run --source=mistree setup.py test
+  - codecov

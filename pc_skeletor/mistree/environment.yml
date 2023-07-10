@@ -1,0 +1,10 @@
+name: mistree
+
+dependencies:
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - pip
+  - pip:
+    - mistree

@@ -1,0 +1,29 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "name": "MiSTree: Construct and analyze Minimum Spanning Tree graphs",
+    "description": "MiSTree quickly constructs minimum spanning tree graphs for various coordinate systems, including Celestial coordinates, by using a k-nearest neighbor graph (kNN, rather than a matrix of pairwise distances) which is then fed to Kruskal's algorithm to create the graph. MiSTree bins the MST statistics into histograms and plots the distributions; enabling the inclusion of high-order statistics information from the cosmic web to provide additional information that improves cosmological parameter constraints. Though MiSTree was designed for use in cosmology, it can be used in any field requiring extracting non-Gaussian information from point distributions.",
+    "identifier": "ascl:1910.016",
+    "author": [
+        {
+            "@type": "Person",
+            "givenName": "Krishna",
+            "familyName": "Naidoo",
+            "id": "0000-0002-9182-1802"
+        }
+    ],
+    "citation": "https://ui.adsabs.harvard.edu/abs/2019ascl.soft10016N",
+    "relatedLink": [
+        "PLACEHOLDER: Add related links here"
+    ],
+    "codeRepository": "https://github.com/knaidoo29/mistree",
+    "referencePublication": [
+        {
+            "@type": "ScholarlyArticle",
+            "url": "https://ui.adsabs.harvard.edu/abs/2019JOSS....4.1721N",
+            "id": "10.21105/joss.00045"
+        }
+    ],
+    "version": "1.2.0",
+    "license": "https://spdx.org/licenses/MIT.html"
+}

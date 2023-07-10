@@ -15,6 +15,7 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'Readme.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+
 setuptools.setup(
     name='pc_skeletor',
     version='1.0.0',
@@ -25,20 +26,20 @@ setuptools.setup(
     author='Lukas Meyer',
     author_email='lukas.meyer@fau.de',
     url="https://github.com/meyerls/PC-Skeletor",
-    packages=find_packages(),
-    install_requires=[#"mistree==1.2.1",
-                      "numpy",
-                      "scipy",
-                      "matplotlib",
-                      "open3d==0.16",
-                      "robust_laplacian==0.2.4",
-                      "dgl",
-                      "torch",
-                      "tqdm",
-                      "imageio",
-                      "wget",
-                      "networkx"],  # external packages as dependencies
-
+    packages=find_packages() + ['pc_skeletor.submodule'],
+    package_dir={'pc_skeletor.submodule': 'mistree/'},
+    install_requires=[  # "mistree==1.2.1",
+        "numpy",
+        "scipy",
+        "matplotlib",
+        "open3d==0.16",
+        "robust_laplacian==0.2.4",
+        "dgl",
+        "torch",
+        "tqdm",
+        "imageio",
+        "wget",
+        "networkx"],  # external packages as dependencies
     classifiers=[
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
