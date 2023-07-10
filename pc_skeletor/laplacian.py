@@ -419,7 +419,7 @@ class SLBC(LaplacianBasedContractionBase):
     """
 
     def __init__(self,
-                 point_cloud: Union[str, open3d.geometry.PointCloud],
+                 point_cloud: Union[str, dict],
                  semantic_weighting: float = 10.,
                  init_contraction: float = 1.,
                  init_attraction: float = 0.5,
