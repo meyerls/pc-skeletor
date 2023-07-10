@@ -2,7 +2,7 @@ numpy
 robust_laplacian==0.2.4
 scipy
 matplotlib
-open3d==0.15.1
+open3d==0.16
 tqdm
 imageio
 networkx
