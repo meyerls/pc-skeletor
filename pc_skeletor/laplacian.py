@@ -549,7 +549,7 @@ if __name__ == "__main__":
     # lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output_1')
     else:
         # Semantic Laplacian-based Contraction
-        s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01)
+        s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.009)
         s_lbc.extract_skeleton()
         s_lbc.extract_topology()
         s_lbc.show_graph(s_lbc.skeleton_graph)
