@@ -26,4 +26,6 @@ jobs:
           pip install .
       - name: 'Test PC Skeletor'
         run: |
+          pwd
+          ls -la
           pytest test
