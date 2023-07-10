@@ -47,7 +47,6 @@ pip install pc-skeletor
  ````sh
 git clone https://github.com/meyerls/pc-skeletor.git
 cd pc-skeletor
-git submodule update --init --recursive
 pip install --upgrade pip setuptools
 pip install -r requirements.txt
 pip install -e .
