@@ -1,12 +1,12 @@
 numpy
-robust_laplacian
+robust_laplacian==0.2.4
 scipy
 matplotlib
-open3d
+open3d==0.15.1
 tqdm
 imageio
 networkx
 charset-normalizer
-mistree==1.2.1
+#mistree==1.2.1
 pytest
 sniffio

@@ -41,12 +41,26 @@ class SkeletonBase(object):
         self.topology_graph: nx.Graph = nx.Graph()
 
     def extract_skeleton(self):
+        '''
+        Extract skeleton from point cloud
+
+        :return:
+        '''
         pass
 
     def extract_topology(self):
+        '''
+        Extract topology from point cloud
+
+        :return:
+        '''
         pass
 
-    def save(self, *args):
+    def process(self):
+        self.extract_topology()
+        self.extract_topology()
+
+    def export_results(self, *args):
         pass
 
     def show_graph(self, graph: networkx.Graph, pos: Union[np.ndarray, bool] = True, fig_size: tuple = (20, 20)):
