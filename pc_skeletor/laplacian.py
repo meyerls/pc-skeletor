@@ -301,7 +301,7 @@ class LaplacianBasedContractionBase(SkeletonBase):
         o3d.io.write_point_cloud(path_contracted_pcd, self.contracted_point_cloud)
 
         path_skeleton = os.path.join(output, '02_skeleton_{}'.format(self.algo_type) + '.ply')
-        o3d.io.write_line_set(filename=path_skeleton, line_set=self.skeleton)
+        o3d.io.write_point_cloud(filename=path_skeleton, pointcloud=self.skeleton)
 
         path_topology = os.path.join(output, '03_topology_{}'.format(self.algo_type) + '.ply')
         o3d.io.write_line_set(filename=path_topology, line_set=self.topology)

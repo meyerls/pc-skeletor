@@ -15,6 +15,9 @@ this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'Readme.md'), encoding='utf-8') as f:
     long_description = f.read()
 
+with open('requirements.txt') as f:
+    install_requires = f.read().strip().split('\n')
+
 setuptools.setup(
     name='pc_skeletor',
     version='1.0.0',
@@ -26,19 +29,7 @@ setuptools.setup(
     author_email='lukas.meyer@fau.de',
     url="https://github.com/meyerls/PC-Skeletor",
     packages=find_packages(),
-    install_requires=[
-        'mistree @ git+https://github.com/meyerls/mistree.git',# "mistree==1.2.1",
-        "numpy",
-        "scipy",
-        "matplotlib",
-        "open3d==0.16",
-        "robust_laplacian==0.2.4",
-        "dgl",
-        "torch",
-        "tqdm",
-        "imageio",
-        "wget",
-        "networkx"],  # external packages as dependencies
+    install_requires=install_requires,  # external packages as dependencies
     python_requires='>=3.7',
     classifiers=[
         'Programming Language :: Python :: 3.7',
@@ -51,3 +42,16 @@ setuptools.setup(
     zip_safe=False,
 )
 
+#[
+#        'mistree @ git+https://github.com/meyerls/mistree.git',# "mistree==1.2.1",
+#        "numpy",
+#        "scipy",
+#        "matplotlib",
+#        "open3d==0.16",
+#        "robust_laplacian==0.2.4",
+#        "dgl",
+#        "torch",
+#        "tqdm",
+#        "imageio",
+#        "wget",
+#        "networkx==2.8.8"],

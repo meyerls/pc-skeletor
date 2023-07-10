@@ -5,8 +5,9 @@ matplotlib
 open3d==0.16
 tqdm
 imageio
-networkx
+networkx==2.8.8
 charset-normalizer
 #mistree==1.2.1
 pytest
 sniffio
+mistree @ git+https://github.com/meyerls/mistree.git
