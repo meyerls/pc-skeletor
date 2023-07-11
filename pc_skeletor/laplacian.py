@@ -30,8 +30,8 @@ class LaplacianBasedContractionBase(SkeletonBase):
                  algo_type: str,
                  point_cloud: Union[str, open3d.geometry.PointCloud, dict],
                  init_contraction: int,
-                 init_attraction: int,
-                 max_contraction: int,
+                 init_attraction: float,
+                 max_contraction: float,
                  max_attraction: int,
                  step_wise_contraction_amplification: Union[float, str],
                  termination_ratio: float,
@@ -364,6 +364,18 @@ class LBC(LaplacianBasedContractionBase):
             o3d.visualization.draw_geometries([pcd], window_name="Default Point Cloud")
 
     def __least_squares_sparse(self, pcd_points, L, laplacian_weighting, positional_weighting):
+        """
+        Perform least squares sparse solving for the Laplacian-based contraction.
+
+        Args:
+            pcd_points: The input point cloud points.
+            L: The Laplacian matrix.
+            laplacian_weighting: The Laplacian weighting matrix.
+            positional_weighting: The positional weighting matrix.
+
+        Returns:
+            The contracted point cloud.
+        """
         # Define Weights
         WL = sparse.diags(laplacian_weighting)  # I * laplacian_weighting
         WH = sparse.diags(positional_weighting)
@@ -414,7 +426,7 @@ class SLBC(LaplacianBasedContractionBase):
 
     Our semantic skeletonization algorithm based on Laplacian-Based Contraction.
 
-    Paper: tbd
+    Paper: https://arxiv.org/abs/2304.04708
 
     """
 
@@ -464,6 +476,18 @@ class SLBC(LaplacianBasedContractionBase):
             o3d.visualization.draw_geometries([self.pcd], window_name="Default Point Cloud")
 
     def __least_squares_sparse(self, pcd_points, L, laplacian_weighting, positional_weighting):
+        """
+        Perform least squares sparse solving for the Semantic Laplacian-Based Contraction (S-LBC).
+
+        Args:
+            pcd_points: The input point cloud points.
+            L: The Laplacian matrix.
+            laplacian_weighting: The Laplacian weighting matrix.
+            positional_weighting: The positional weighting matrix.
+
+        Returns:
+            The contracted point cloud.
+        """
         # Define Weights
         WL = sparse.diags(laplacian_weighting)  # I * laplacian_weighting
         WH = sparse.diags(positional_weighting)
@@ -484,6 +508,7 @@ class SLBC(LaplacianBasedContractionBase):
         num_valid = np.arange(0, pcd_points.shape[0])[mask]
         S[rows, cols] = 1
 
+        # ToDo: Speed up!
         for i in num_valid:
             S[i, L[i].nonzero()[1]] = multiplier
 

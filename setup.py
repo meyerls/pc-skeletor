@@ -41,17 +41,3 @@ setuptools.setup(
     ],
     zip_safe=False,
 )
-
-#[
-#        'mistree @ git+https://github.com/meyerls/mistree.git',# "mistree==1.2.1",
-#        "numpy",
-#        "scipy",
-#        "matplotlib",
-#        "open3d==0.16",
-#        "robust_laplacian==0.2.4",
-#        "dgl",
-#        "torch",
-#        "tqdm",
-#        "imageio",
-#        "wget",
-#        "networkx==2.8.8"],

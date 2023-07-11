@@ -5,7 +5,7 @@ matplotlib
 open3d==0.16
 tqdm
 imageio
-networkx==2.8.8
+networkx==2.6.3
 charset-normalizer
 #mistree==1.2.1
 pytest
