@@ -35,7 +35,7 @@ information of the point cloud into the contraction algorithm to overcome these 
 
 ### Installation
 
-First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed
+First install [Python](https://www.python.org/downloads/) Version 3.8 or higher. The python package can be installed
 via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
 
  ````sh
@@ -86,8 +86,6 @@ lbc.extract_topology()
 
 # Debug/Visualization
 lbc.visualize()
-lbc.show_graph(lbc.skeleton_graph)
-lbc.show_graph(lbc.topology_graph)
 lbc.export_results('./output')
 lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]),
             steps=300,
