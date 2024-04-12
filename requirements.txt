@@ -1,4 +1,3 @@
-numpy
 robust_laplacian==0.2.4
 scipy
 matplotlib
