@@ -20,7 +20,7 @@ with open('requirements.txt') as f:
 
 setuptools.setup(
     name='pc_skeletor',
-    version='1.0.0',
+    version='1.0.1',
     description='Point Cloud Skeletonizer',
     license="MIT",
     long_description=long_description,
