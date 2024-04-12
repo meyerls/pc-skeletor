@@ -11,9 +11,13 @@ pc_skeletor.egg-info
 pc_skeletor/__pycache__/**
 pc_skeletor/tmp*
 
+# Output
+pc_skeletor/output*
 output
+
 __pycache__
 test/__pycache__
-
 test/__pycache__/**
 __pycache__/**
+
+annotated_tree.py

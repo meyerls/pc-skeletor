@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
+        python-version: ["3.8", "3.9", "3.10" ]
 
     steps:
       - uses: actions/checkout@v3
@@ -22,15 +22,10 @@ jobs:
           pip install pip==21.3.1
           pip install numpy --use-deprecated=legacy-resolver
           pip install charset_normalizer
-          git clone https://github.com/meyerls/mistree.git
-          cd mistree 
-          pip install -e .
-          cd ..
           pip install -r requirements.txt
           pip install .
-      #- name: 'Test PC Skeletor'
-      #  run: |
-      #    pytest .
-      #    ls -la
-      #    ls -la ${{ github.workspace }}
-      #    pwd
+      - name: 'Test PC Skeletor'
+        run: |
+          pwd
+          ls -la
+          pytest tests

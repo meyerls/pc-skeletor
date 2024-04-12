@@ -5,17 +5,17 @@
 <a href="https://github.com/meyerls/pc-skeletor/blob/main/LICENSE"><img alt="license" src="https://img.shields.io/github/license/meyerls/pc-skeletor"></a>
 <!--a href="https://github.com/meyerls/pc-skeletor/actions"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/meyerls/pc-skeletor/Python%20package"></a-->
 
-**PC Skeletor** is a Python library for extracting a 1d skeleton from 3d point clouds using
+**PC Skeletor** is a Python library for extracting a curved skeleton from 3d point clouds using
 [Laplacian-Based Contraction](https://taiya.github.io/pubs/cao2010cloudcontr.pdf) and
 [Semantic Laplacian-Based Contraction](https://arxiv.org/abs/2304.04708).
 
 ## Abstract
-Standard Laplacian-based contraction (LBC) is prone to mal-contraction in cases where
+Basic Laplacian-based contraction (LBC) is prone to mal-contraction in cases where
 there is a significant disparity in diameter between trunk and branches. In such cases fine structures experience 
 an over-contraction and leading to a distortion of their topological characteristics. In addition, LBC shows a 
 topologically incorrect tree skeleton for trunk structures that have holes in the point cloud.In order to address 
 these topological artifacts, we introduce semantic Laplacian-based contraction (S-LBC). It integrates semantic 
-information of the point cloud into the contraction algorithm.
+information of the point cloud into the contraction algorithm to overcome these artifacts.
 
 
 <table>
@@ -35,7 +35,7 @@ information of the point cloud into the contraction algorithm.
 
 ### Installation
 
-First install [Python](https://www.python.org/downloads/) Version 3.7 or higher. The python package can be installed
+First install [Python](https://www.python.org/downloads/) Version 3.8 or higher. The python package can be installed
 via [PyPi](https://pypi.org/project/pc-skeletor/) using pip.
 
  ````sh
@@ -83,10 +83,10 @@ lbc = LBC(point_cloud=pcd,
           down_sample=0.008)
 lbc.extract_skeleton()
 lbc.extract_topology()
+
+# Debug/Visualization
 lbc.visualize()
-lbc.show_graph(lbc.skeleton_graph)
-lbc.show_graph(lbc.topology_graph)
-lbc.save('./output')
+lbc.export_results('./output')
 lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]),
             steps=300,
             output='./output')
@@ -103,10 +103,12 @@ s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch},
              debug=True)
 s_lbc.extract_skeleton()
 s_lbc.extract_topology()
+
+# Debug/Visualization
 s_lbc.visualize()
 s_lbc.show_graph(s_lbc.skeleton_graph)
 s_lbc.show_graph(s_lbc.topology_graph)
-s_lbc.save('./output')
+s_lbc.export_results('./output')
 s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
 ````
 

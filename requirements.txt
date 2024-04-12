@@ -1,12 +1,13 @@
 numpy
-robust_laplacian
+robust_laplacian==0.2.4
 scipy
 matplotlib
-open3d
+open3d==0.16
 tqdm
 imageio
-networkx
+networkx==2.6.3
 charset-normalizer
-mistree==1.2.1
+#mistree==1.2.1
 pytest
 sniffio
+mistree @ git+https://github.com/meyerls/mistree.git

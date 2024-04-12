@@ -13,6 +13,7 @@ import open3d
 import open3d.visualization as o3d
 import robust_laplacian
 import mistree as mist
+import networkx as nx
 
 # Own modules
 from pc_skeletor.download import *
@@ -29,8 +30,8 @@ class LaplacianBasedContractionBase(SkeletonBase):
                  algo_type: str,
                  point_cloud: Union[str, open3d.geometry.PointCloud, dict],
                  init_contraction: int,
-                 init_attraction: int,
-                 max_contraction: int,
+                 init_attraction: float,
+                 max_contraction: float,
                  max_attraction: int,
                  step_wise_contraction_amplification: Union[float, str],
                  termination_ratio: float,
@@ -58,16 +59,16 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         # Set or load point cloud to apply algorithm
         if isinstance(point_cloud, str):
-            self.pcd: o3d.geometry.PointCloud = load_pcd(filename=point_cloud, normalize=False)
+            self.pcd: o3d.geometry.PointCloud = load_pcd(filename=point_cloud)
         elif isinstance(point_cloud, dict):
             # Currently only two classes are supported!
             if isinstance(point_cloud['trunk'], str):
-                self.trunk: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['trunk'], normalize=False)
+                self.trunk: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['trunk'])
             else:
                 self.trunk: o3d.geometry.PointCloud = point_cloud['trunk']
 
             if isinstance(point_cloud['branches'], str):
-                self.branches: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['branches'], normalize=False)
+                self.branches: o3d.geometry.PointCloud = load_pcd(filename=point_cloud['branches'])
             else:
                 self.branches: o3d.geometry.PointCloud = point_cloud['branches']
         elif isinstance(point_cloud, open3d.geometry.PointCloud):
@@ -181,7 +182,7 @@ class LaplacianBasedContractionBase(SkeletonBase):
         pcd_points_current = pcd_points
         while np.mean(M_list[-1]) / np.mean(M_list[0]) > self.param_termination_ratio:
             pbar.set_description(
-                "Current volume ratio {}. Contraction weights {}. Attraction weights {}. Progress {}".format(
+                "Volume ratio: {}. Contraction weights: {}. Attraction weights: {}. Progress {}".format(
                     volume_ratio, np.mean(laplacian_weights), np.mean(positional_weights), self.algo_type))
             logging.debug('Laplacian Weight: {}'.format(laplacian_weights))
             logging.debug('Mean Positional Weight: {}'.format(np.mean(positional_weights)))
@@ -294,22 +295,22 @@ class LaplacianBasedContractionBase(SkeletonBase):
 
         return self.topology
 
-    def save(self, output: str):
+    def export_results(self, output: str):
         os.makedirs(output, exist_ok=True)
         path_contracted_pcd = os.path.join(output, '01_point_cloud_contracted_{}'.format(self.algo_type) + '.ply')
         o3d.io.write_point_cloud(path_contracted_pcd, self.contracted_point_cloud)
 
         path_skeleton = os.path.join(output, '02_skeleton_{}'.format(self.algo_type) + '.ply')
-        o3d.io.write_point_cloud(path_skeleton, self.skeleton)
+        o3d.io.write_point_cloud(filename=path_skeleton, pointcloud=self.skeleton)
 
         path_topology = os.path.join(output, '03_topology_{}'.format(self.algo_type) + '.ply')
-        o3d.io.write_line_set(path_topology, self.topology)
+        o3d.io.write_line_set(filename=path_topology, line_set=self.topology)
 
         path_skeleton_graph = os.path.join(output, '04_skeleton_graph_{}'.format(self.algo_type) + '.gpickle')
-        nx.write_gpickle(self.skeleton_graph, path_skeleton_graph)
+        nx.write_gpickle(G=self.skeleton_graph, path=path_skeleton_graph)
 
         path_topology_graph = os.path.join(output, '05_topology_graph_{}'.format(self.algo_type) + '.gpickle')
-        nx.write_gpickle(self.skeleton_graph, path_topology_graph)
+        nx.write_gpickle(G=self.topology_graph, path=path_topology_graph)
 
 
 class LBC(LaplacianBasedContractionBase):
@@ -363,6 +364,18 @@ class LBC(LaplacianBasedContractionBase):
             o3d.visualization.draw_geometries([pcd], window_name="Default Point Cloud")
 
     def __least_squares_sparse(self, pcd_points, L, laplacian_weighting, positional_weighting):
+        """
+        Perform least squares sparse solving for the Laplacian-based contraction.
+
+        Args:
+            pcd_points: The input point cloud points.
+            L: The Laplacian matrix.
+            laplacian_weighting: The Laplacian weighting matrix.
+            positional_weighting: The positional weighting matrix.
+
+        Returns:
+            The contracted point cloud.
+        """
         # Define Weights
         WL = sparse.diags(laplacian_weighting)  # I * laplacian_weighting
         WH = sparse.diags(positional_weighting)
@@ -413,12 +426,12 @@ class SLBC(LaplacianBasedContractionBase):
 
     Our semantic skeletonization algorithm based on Laplacian-Based Contraction.
 
-    Paper: tbd
+    Paper: https://arxiv.org/abs/2304.04708
 
     """
 
     def __init__(self,
-                 point_cloud: Union[str, open3d.geometry.PointCloud],
+                 point_cloud: Union[str, dict],
                  semantic_weighting: float = 10.,
                  init_contraction: float = 1.,
                  init_attraction: float = 0.5,
@@ -463,6 +476,18 @@ class SLBC(LaplacianBasedContractionBase):
             o3d.visualization.draw_geometries([self.pcd], window_name="Default Point Cloud")
 
     def __least_squares_sparse(self, pcd_points, L, laplacian_weighting, positional_weighting):
+        """
+        Perform least squares sparse solving for the Semantic Laplacian-Based Contraction (S-LBC).
+
+        Args:
+            pcd_points: The input point cloud points.
+            L: The Laplacian matrix.
+            laplacian_weighting: The Laplacian weighting matrix.
+            positional_weighting: The positional weighting matrix.
+
+        Returns:
+            The contracted point cloud.
+        """
         # Define Weights
         WL = sparse.diags(laplacian_weighting)  # I * laplacian_weighting
         WH = sparse.diags(positional_weighting)
@@ -483,6 +508,7 @@ class SLBC(LaplacianBasedContractionBase):
         num_valid = np.arange(0, pcd_points.shape[0])[mask]
         S[rows, cols] = 1
 
+        # ToDo: Speed up!
         for i in num_valid:
             S[i, L[i].nonzero()[1]] = multiplier
 
@@ -531,22 +557,28 @@ if __name__ == "__main__":
     pcd_branch = o3d.io.read_point_cloud(branch_pcd_path)
     pcd = pcd_trunk + pcd_branch
 
+    # pcd = o3d.io.read_point_cloud("/home/luigi/Documents/reco/23_04_14/02/tree.ply")
     # Laplacian-based Contraction
-    lbc = LBC(point_cloud=pcd, down_sample=0.01)
-    lbc.extract_skeleton()
-    lbc.extract_topology()
-    lbc.show_graph(lbc.skeleton_graph)
-    lbc.show_graph(lbc.topology_graph)
-    lbc.visualize()
-    lbc.save('./output')
-    lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
-
-    # Semantic Laplacian-based Contraction
-    s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.01)
-    s_lbc.extract_skeleton()
-    s_lbc.extract_topology()
-    s_lbc.show_graph(s_lbc.skeleton_graph)
-    s_lbc.show_graph(s_lbc.topology_graph)
-    s_lbc.visualize()
-    s_lbc.save('./output')
-    s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
+    if False:
+        lbc = LBC(point_cloud=pcd, init_contraction=3.,
+                  init_attraction=0.6,
+                  max_contraction=2048,
+                  max_attraction=1024,
+                  down_sample=0.02)
+        lbc.extract_skeleton()
+        lbc.extract_topology()
+        lbc.show_graph(lbc.skeleton_graph)
+        lbc.show_graph(lbc.topology_graph)
+        lbc.visualize()
+        lbc.export_results('./output')
+    # lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output_1')
+    else:
+        # Semantic Laplacian-based Contraction
+        s_lbc = SLBC(point_cloud={'trunk': pcd_trunk, 'branches': pcd_branch}, semantic_weighting=10, down_sample=0.009)
+        s_lbc.extract_skeleton()
+        s_lbc.extract_topology()
+        s_lbc.show_graph(s_lbc.skeleton_graph)
+        s_lbc.show_graph(s_lbc.topology_graph)
+        s_lbc.visualize()
+        s_lbc.export_results('./output')
+        s_lbc.animate(init_rot=np.asarray([[1, 0, 0], [0, 0, 1], [0, 1, 0]]), steps=300, output='./output')
