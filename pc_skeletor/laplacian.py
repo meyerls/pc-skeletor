@@ -361,7 +361,7 @@ class LBC(LaplacianBasedContractionBase):
                                                               std_ratio=filter_std_ratio)
 
         if self.debug:
-            o3d.visualization.draw_geometries([pcd], window_name="Default Point Cloud")
+            o3d.visualization.draw_geometries([self.pcd], window_name="Default Point Cloud")
 
     def __least_squares_sparse(self, pcd_points, L, laplacian_weighting, positional_weighting):
         """
@@ -410,7 +410,7 @@ class LBC(LaplacianBasedContractionBase):
         if self.debug:
             pcd = o3d.geometry.PointCloud()
             pcd.points = o3d.utility.Vector3dVector(pcd_points)
-            mean_curvature_flow = WL_L @ pcd_points
+            mean_curvature_flow = L @ pcd_points
             # Scale normals for visualization
             pcd.normals = o3d.utility.Vector3dVector(mean_curvature_flow / 5)
 
