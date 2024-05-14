@@ -410,7 +410,7 @@ class LBC(LaplacianBasedContractionBase):
         if self.debug:
             pcd = o3d.geometry.PointCloud()
             pcd.points = o3d.utility.Vector3dVector(pcd_points)
-            mean_curvature_flow = WL @ pcd_points
+            mean_curvature_flow = L @ pcd_points
             # Scale normals for visualization
             pcd.normals = o3d.utility.Vector3dVector(mean_curvature_flow / 5)
 
